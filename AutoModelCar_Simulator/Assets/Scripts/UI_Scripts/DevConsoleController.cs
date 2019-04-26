@@ -7,6 +7,7 @@ using System;
 public class DevConsoleController : MonoBehaviour {
 	private InputField input;
 	private Text output;
+	private string output_s;
 	private GameObject consoleContainer;
 
 	void Awake()
@@ -15,10 +16,11 @@ public class DevConsoleController : MonoBehaviour {
 	}
 
 	void Start () {
-		Globals.DevConsole = this;
+		Globals.Instance.DevConsole = this;
 		consoleContainer = transform.Find("DevConsole").gameObject;
 		output = transform.Find("DevConsole/Output").GetComponent<Text>();
 		input = transform.Find("DevConsole/Input").GetComponent<InputField>();
+		output_s = output.text;
 		consoleContainer.SetActive(false);
 	}
 
@@ -27,6 +29,7 @@ public class DevConsoleController : MonoBehaviour {
 			execute(input.text);
 			input.text = "";
 		}
+		output.text = output_s;
 	}
 
 	public void execute(string command) {
@@ -42,7 +45,7 @@ public class DevConsoleController : MonoBehaviour {
 
 	public void print(string s) {
 		Debug.Log("CONSOLE:" + s);
-		output.text += "\n> " + s;
+		output_s += "\n> " + s;
 	}
 
 	public void show() {

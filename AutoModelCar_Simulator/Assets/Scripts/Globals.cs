@@ -4,13 +4,16 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class Globals : MonoBehaviour {
-	public static Globals Data;
-	public static DevConsoleController DevConsole;
+
+	public static Globals Instance { get; private set; }
+
+	public DevConsoleController DevConsole;
 
 	void Awake()
 	{
-		if(Data != null) GameObject.Destroy(Data);
-		else Data = this;
+		if(Instance != null) GameObject.Destroy(Instance);
+		else Instance = this;
+
 		DontDestroyOnLoad(this);
 	}
 		
