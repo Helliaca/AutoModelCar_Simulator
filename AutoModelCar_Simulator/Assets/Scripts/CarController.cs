@@ -34,8 +34,8 @@ public class CarController : MonoBehaviour
         Vector3 offset = new Vector3(0,0,0);
         offset += transform.forward * speed * Mathf.Cos(Mathf.Deg2Rad * steering);
         offset += transform.right * speed * Mathf.Sin(Mathf.Deg2Rad * steering);
-        transform.position += offset * Time.deltaTime * 0.01f;
-        transform.Rotate(Vector3.up, speed * steering * Time.deltaTime * 0.05f);
+        transform.position += offset * Time.deltaTime * 0.005f;
+        transform.Rotate(Vector3.up, speed * steering * Time.deltaTime * 0.01f);
 
         nav_msgs.Odometry co = new nav_msgs.Odometry();
         co.pose.pose.position = new geo_msgs.Point();
@@ -62,6 +62,7 @@ public class CarController : MonoBehaviour
     private void steering_callback(std_msgs.UInt8 data) {
         steering = (float)data.data;
         steering = (steering/180.0f) * 50.0f - 25.0f; //converting coordinates from [0,180] to [-25,25]
+        
         //Globals.Instance.DevConsole.print("New steering: " + data.data);
     }
 }
