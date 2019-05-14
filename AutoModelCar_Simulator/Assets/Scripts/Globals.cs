@@ -12,6 +12,10 @@ public class Globals : MonoBehaviour {
 
 	public CarController CurrentCar;
 
+	public CircleRenderer CircleDraw;
+	public Transform c_marker;
+	public Camera UI_GRAPH_CAMERA;
+
 	void Awake()
 	{
 		if(Instance != null) GameObject.Destroy(Instance);

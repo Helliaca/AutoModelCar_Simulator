@@ -11,7 +11,8 @@ public class CarController : MonoBehaviour
     [Header("Car Axles")]
     public Transform backAxle;
     public Transform frontAxle;
-    public Transform C_marker;
+    public Transform frontWheel_right;
+    public Transform frontWheel_left;
 
     
     public float speed {
@@ -51,23 +52,42 @@ public class CarController : MonoBehaviour
 
     void Update()
     {
-        //steering = 0; //For testing
-        //speed = 2500;
+        //steering = 180; //For testing
+        //speed = 250;
         float Tan_Phi = (Mathf.Tan(Phi)!=0.0f) ? Mathf.Tan(Phi) : 0.0000001f; //Avoid Tan(Phi)=0, because it causes trouble
 
         L = Vector3.Distance(backAxle.position, frontAxle.position); // L is the distance between the front and back axle
         R = Mathf.Abs(L / Tan_Phi);
 
+        float T = Vector3.Distance(frontWheel_left.position, frontWheel_right.position); //Interwheel distance
+
         float amount_of_rotation;
         if(Phi>0) {
             C = backAxle.position + transform.right * R;
             amount_of_rotation = (speed_mps*Time.deltaTime)/R;
+
+            //Individual wheel rotation
+            frontWheel_left.localRotation = Quaternion.Euler(0, Mathf.Rad2Deg * Mathf.Atan(L/(R-T/2)), 0);
+            frontWheel_right.localRotation = Quaternion.Euler(0, Mathf.Rad2Deg * Mathf.Atan(L/(R+T/2)), 0);
         }
         else {
             C = backAxle.position - transform.right * R;
             amount_of_rotation = -(speed_mps*Time.deltaTime)/R;
+
+            //Individual wheel rotation
+            frontWheel_left.localRotation = Quaternion.Euler(0, -1f * Mathf.Rad2Deg * Mathf.Atan(L/(R-T/2)), 0);
+            frontWheel_right.localRotation = Quaternion.Euler(0, -1f * Mathf.Rad2Deg * Mathf.Atan(L/(R+T/2)), 0);
         }
-        C_marker.position = C;
+
+        // GUI and HUD stuff
+        if(Globals.Instance.c_marker.gameObject.activeSelf) {
+            Globals.Instance.c_marker.position = C;
+        }
+        if(Globals.Instance.CircleDraw.gameObject.activeSelf) {
+            Globals.Instance.CircleDraw.center = C;
+            Globals.Instance.CircleDraw.xradius = R;
+            Globals.Instance.CircleDraw.yradius = R;
+        }
 
         transform.RotateAround(C, Vector3.up, Mathf.Rad2Deg*amount_of_rotation);
     }

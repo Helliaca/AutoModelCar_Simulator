@@ -44,13 +44,23 @@ public class DevConsoleController : MonoBehaviour {
 		if(cmds[0] == "hi") {
 			print("whats up");
 		}
-		if(cmds[0] == "toggle") {
+		else if(cmds[0] == "toggle") {
 			GameObject obj = (GameObject) Globals.GlobalFind(cmds[1], typeof(GameObject));
 			obj.SetActive(!obj.activeSelf);
 		}
-		if(cmds[0] == "toggleHUD") {
+		else if(cmds[0] == "toggleHUD") {
 			GraphController[] objs = (GraphController[])Resources.FindObjectsOfTypeAll(typeof(GraphController));
 			foreach(GraphController g in objs) { g.gameObject.SetActive(!g.gameObject.activeSelf); }
+		}
+		else if(cmds[0] == "toggleCircle") {
+			Globals.Instance.CircleDraw.gameObject.SetActive(!Globals.Instance.CircleDraw.gameObject.activeSelf);
+			Globals.Instance.c_marker.gameObject.SetActive(!Globals.Instance.c_marker.gameObject.activeSelf);
+		}
+		else if(cmds[0] == "set_speed") {
+			Globals.Instance.CurrentCar.speed = float.Parse(cmds[1]);
+		}
+		else if(cmds[0] == "set_steering") {
+			Globals.Instance.CurrentCar.steering = float.Parse(cmds[1]);
 		}
 		else {
 			print("Command not recognized: " + command);

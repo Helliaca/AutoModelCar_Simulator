@@ -13,14 +13,14 @@ public class WindowHandle : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     void Update()
     {
         if(isPressed && Input.GetMouseButton(0)) {
-            window.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + offset);
+            window.position = Globals.Instance.UI_GRAPH_CAMERA.ScreenToWorldPoint(Input.mousePosition + offset);
         }
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         isPressed = true;
-        offset = Camera.main.WorldToScreenPoint(window.position) - Input.mousePosition;
+        offset = Globals.Instance.UI_GRAPH_CAMERA.WorldToScreenPoint(window.position) - Input.mousePosition;
     }
 
     public void OnPointerUp(PointerEventData eventData)
