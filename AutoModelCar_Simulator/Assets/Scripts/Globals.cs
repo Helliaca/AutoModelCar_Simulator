@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class Globals : MonoBehaviour {
 	public static Globals Instance { get; private set; }
 
 	public DevConsoleController DevConsole;
+
+	public CarController CurrentCar;
 
 	void Awake()
 	{
@@ -23,4 +26,20 @@ public class Globals : MonoBehaviour {
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.Comma)) DevConsole.toggle();
 	}
+
+	public static Object GlobalFind(string name, System.Type type)
+	{
+		Object [] objs = Resources.FindObjectsOfTypeAll(type);
+	
+		foreach (Object obj in objs)
+		{
+			if (obj.name == name)
+			{
+				return obj;
+			}
+		}
+	
+		return null;
+	}
+
 }
