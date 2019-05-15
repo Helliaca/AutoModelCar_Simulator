@@ -49,8 +49,11 @@ public class DevConsoleController : MonoBehaviour {
 			obj.SetActive(!obj.activeSelf);
 		}
 		else if(cmds[0] == "toggleHUD") {
-			GraphController[] objs = (GraphController[])Resources.FindObjectsOfTypeAll(typeof(GraphController));
-			foreach(GraphController g in objs) { g.gameObject.SetActive(!g.gameObject.activeSelf); }
+			GameObject HUDcanvas = GameObject.Find("HUDCanvas");
+			foreach (Transform child in HUDcanvas.transform)
+			{
+				child.gameObject.SetActive(!child.gameObject.activeSelf);
+			}
 		}
 		else if(cmds[0] == "toggleCircle") {
 			Globals.Instance.CircleDraw.gameObject.SetActive(!Globals.Instance.CircleDraw.gameObject.activeSelf);

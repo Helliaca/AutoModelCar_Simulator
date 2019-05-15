@@ -15,6 +15,7 @@ public class Globals : MonoBehaviour {
 	public CircleRenderer CircleDraw;
 	public Transform c_marker;
 	public Camera UI_GRAPH_CAMERA;
+	public AckController Ack_HUD;
 
 	void Awake()
 	{

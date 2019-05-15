@@ -19,6 +19,9 @@ public class CarController : MonoBehaviour
         set { speed_topic = value; speed_mps = speed_interp.Evaluate(value); }
         get { return speed_topic; }
     }
+    public float speed_real {
+        get { return speed_mps; }
+    }
     public float steering {
         set { steering_topic = value; Phi = Mathf.Deg2Rad*steering_interp.Evaluate(value); }
         get { return steering_topic; }
@@ -61,23 +64,25 @@ public class CarController : MonoBehaviour
 
         float T = Vector3.Distance(frontWheel_left.position, frontWheel_right.position); //Interwheel distance
 
-        float amount_of_rotation;
+        float amount_of_rotation=0, lw_rot=0, rw_rot=0;
         if(Phi>0) {
             C = backAxle.position + transform.right * R;
             amount_of_rotation = (speed_mps*Time.deltaTime)/R;
 
             //Individual wheel rotation
-            frontWheel_left.localRotation = Quaternion.Euler(0, Mathf.Rad2Deg * Mathf.Atan(L/(R-T/2)), 0);
-            frontWheel_right.localRotation = Quaternion.Euler(0, Mathf.Rad2Deg * Mathf.Atan(L/(R+T/2)), 0);
+            lw_rot = Mathf.Rad2Deg * Mathf.Atan(L/(R-T/2));
+            rw_rot = Mathf.Rad2Deg * Mathf.Atan(L/(R+T/2));
         }
         else {
             C = backAxle.position - transform.right * R;
             amount_of_rotation = -(speed_mps*Time.deltaTime)/R;
 
             //Individual wheel rotation
-            frontWheel_left.localRotation = Quaternion.Euler(0, -1f * Mathf.Rad2Deg * Mathf.Atan(L/(R-T/2)), 0);
-            frontWheel_right.localRotation = Quaternion.Euler(0, -1f * Mathf.Rad2Deg * Mathf.Atan(L/(R+T/2)), 0);
+            lw_rot = -1f * Mathf.Rad2Deg * Mathf.Atan(L/(R-T/2));
+            rw_rot = -1f * Mathf.Rad2Deg * Mathf.Atan(L/(R+T/2));
         }
+        frontWheel_left.localRotation = Quaternion.Euler(0, lw_rot, 0);
+        frontWheel_right.localRotation = Quaternion.Euler(0, rw_rot, 0);
 
         // GUI and HUD stuff
         if(Globals.Instance.c_marker.gameObject.activeSelf) {
@@ -87,6 +92,9 @@ public class CarController : MonoBehaviour
             Globals.Instance.CircleDraw.center = C;
             Globals.Instance.CircleDraw.xradius = R;
             Globals.Instance.CircleDraw.yradius = R;
+        }
+        if(Globals.Instance.Ack_HUD.gameObject.activeSelf) {
+            Globals.Instance.Ack_HUD.setValues(Mathf.Rad2Deg*Phi, lw_rot, rw_rot, L, R, C, Mathf.Rad2Deg*amount_of_rotation*1f/Time.deltaTime);
         }
 
         transform.RotateAround(C, Vector3.up, Mathf.Rad2Deg*amount_of_rotation);
