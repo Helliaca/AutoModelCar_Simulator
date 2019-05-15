@@ -5,10 +5,11 @@ using UnityEngine.UI;
 using System;
 
 public class DevConsoleController : MonoBehaviour {
-	private InputField input;
-	private Text output;
+	public InputField input;
+	public Text output;
 	private string output_s;
-	private GameObject consoleContainer;
+	public GameObject consoleContainer;
+	public ScrollRect output_scrollrect;
 
 	void Awake()
 	{
@@ -17,9 +18,6 @@ public class DevConsoleController : MonoBehaviour {
 
 	void Start () {
 		Globals.Instance.DevConsole = this;
-		consoleContainer = transform.Find("DevConsole").gameObject;
-		output = transform.Find("DevConsole/Output").GetComponent<Text>();
-		input = transform.Find("DevConsole/Input").GetComponent<InputField>();
 		output_s = output.text;
 		consoleContainer.SetActive(false);
 	}
@@ -39,31 +37,44 @@ public class DevConsoleController : MonoBehaviour {
 	}
 
 	public void execute(string command) {
+		mirror(command);
 		string[] cmds = command.Split(' ');
 
 		if(cmds[0] == "hi") {
 			print("whats up");
 		}
-		else if(cmds[0] == "toggle") {
-			GameObject obj = (GameObject) Globals.GlobalFind(cmds[1], typeof(GameObject));
-			obj.SetActive(!obj.activeSelf);
+		else if(cmds[0] == "clear") {
+			output_s = "";
+			print("Output cleared");
 		}
-		else if(cmds[0] == "toggleHUD") {
+		else if(cmds[0] == "fill") {
+			for(int i=0; i<100; i++) print("Fill");
+		}
+		else if(cmds[0] == "toggle" && cmds[1]=="HUD") {
 			GameObject HUDcanvas = GameObject.Find("HUDCanvas");
 			foreach (Transform child in HUDcanvas.transform)
 			{
 				child.gameObject.SetActive(!child.gameObject.activeSelf);
+				print(child.gameObject.name + " enabled: " + child.gameObject.activeSelf);
 			}
 		}
-		else if(cmds[0] == "toggleCircle") {
+		else if(cmds[0] == "toggle" && cmds[1]=="Circle") {
 			Globals.Instance.CircleDraw.gameObject.SetActive(!Globals.Instance.CircleDraw.gameObject.activeSelf);
 			Globals.Instance.c_marker.gameObject.SetActive(!Globals.Instance.c_marker.gameObject.activeSelf);
+			print("Circle toggled");
+		}
+		else if(cmds[0] == "toggle") {
+			GameObject obj = (GameObject) Globals.GlobalFind(cmds[1], typeof(GameObject));
+			obj.SetActive(!obj.activeSelf);
+			print(obj.name + " enabled: " + obj.activeSelf);
 		}
 		else if(cmds[0] == "set_speed") {
 			Globals.Instance.CurrentCar.speed = float.Parse(cmds[1]);
+			print("Setting speed to " + cmds[1]);
 		}
 		else if(cmds[0] == "set_steering") {
 			Globals.Instance.CurrentCar.steering = float.Parse(cmds[1]);
+			print("Setting steering to " + cmds[1]);
 		}
 		else {
 			print("Command not recognized: " + command);
@@ -75,6 +86,14 @@ public class DevConsoleController : MonoBehaviour {
 	public void print(string s) {
 		Debug.Log("CONSOLE:" + s);
 		output_s += "\n> " + s;
+	}
+
+	public void mirror(string s) {
+		output_s += "\n# <color=green><b>" + s + "</b></color>";
+	}
+
+	public void error(string s) {
+		output_s += "\n! <color=red>" + s + "</color>";
 	}
 
 	public void show() {
