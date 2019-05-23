@@ -9,6 +9,7 @@ public class Globals : MonoBehaviour {
 	public static Globals Instance { get; private set; }
 
 	public DevConsoleController DevConsole;
+	public KeyFrameEditor kfEditor;
 
 	public CarController CurrentCar;
 

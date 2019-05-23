@@ -13,6 +13,7 @@ public class CarController : MonoBehaviour
     public Transform frontAxle;
     public Transform frontWheel_right;
     public Transform frontWheel_left;
+    public PropulsionAxle prop_axle;
 
     
     public float speed {
