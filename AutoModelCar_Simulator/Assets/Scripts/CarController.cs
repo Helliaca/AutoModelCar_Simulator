@@ -14,6 +14,7 @@ public class CarController : MonoBehaviour
     public Transform frontWheel_right;
     public Transform frontWheel_left;
     public PropulsionAxle prop_axle;
+    public RosConnector Connection;
 
     
     public float speed {
@@ -29,7 +30,6 @@ public class CarController : MonoBehaviour
     }
 
     //Private variables
-    private RosSocket rosSocket;
     private string speed_sub;
     private string steering_sub;
     private string odom_pub;
@@ -46,11 +46,13 @@ public class CarController : MonoBehaviour
     void Start()
     {
         //rosSocket = new RosSocket(new RosSharp.RosBridgeClient.Protocols.WebSocketNetProtocol("ws://192.168.178.23:9090"));
-        rosSocket = new RosSocket(new RosSharp.RosBridgeClient.Protocols.WebSocketSharpProtocol("ws://192.168.178.23:9090"));
+        //rosSocket = new RosSocket(new RosSharp.RosBridgeClient.Protocols.WebSocketSharpProtocol("ws://192.168.178.23:9090"));
 
-        speed_sub = rosSocket.Subscribe<std_msgs.Int16>("/manual_control/speed", speed_callback);
-        steering_sub = rosSocket.Subscribe<std_msgs.UInt8>("/steering", steering_callback);
-        odom_pub = rosSocket.Advertise<nav_msgs.Odometry>("/localization/odom/5");
+        //Connection.RosSocket.Subscribe
+
+        speed_sub = Connection.RosSocket.Subscribe<std_msgs.Int16>("/manual_control/speed", speed_callback);
+        steering_sub = Connection.RosSocket.Subscribe<std_msgs.UInt8>("/steering", steering_callback);
+        odom_pub = Connection.RosSocket.Advertise<nav_msgs.Odometry>("/localization/odom/5");
         stime = Time.time;
     }
 
@@ -118,7 +120,7 @@ public class CarController : MonoBehaviour
         co.pose.pose.orientation.z = rot.z;
         co.pose.pose.orientation.w = rot.w;
 
-        rosSocket.Publish(odom_pub, co);        
+        Connection.RosSocket.Publish(odom_pub, co);        
         stime = Time.time;
     }
 

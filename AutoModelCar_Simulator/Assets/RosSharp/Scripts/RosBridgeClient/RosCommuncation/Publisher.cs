@@ -17,20 +17,23 @@ using UnityEngine;
 
 namespace RosSharp.RosBridgeClient
 {
-    [RequireComponent(typeof(RosConnector))]
+    //[RequireComponent(typeof(RosConnector))]
     public abstract class Publisher<T> : MonoBehaviour where T: Message
     {
+        public RosConnector Connection;
         public string Topic;
         private string publicationId;
 
         protected virtual void Start()
         {
-            publicationId = GetComponent<RosConnector>().RosSocket.Advertise<T>(Topic);
+            //publicationId = GetComponent<RosConnector>().RosSocket.Advertise<T>(Topic);
+            publicationId = Connection.RosSocket.Advertise<T>(Topic);
         }
 
         protected void Publish(T message)
         {
-            GetComponent<RosConnector>().RosSocket.Publish(publicationId, message);
+            //GetComponent<RosConnector>().RosSocket.Publish(publicationId, message);
+            Connection.RosSocket.Publish(publicationId, message);
         }
     }
 }
