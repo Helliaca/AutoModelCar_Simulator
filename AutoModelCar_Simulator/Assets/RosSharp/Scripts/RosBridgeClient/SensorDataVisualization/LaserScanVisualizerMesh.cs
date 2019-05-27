@@ -28,7 +28,8 @@ public class LaserScanVisualizerMesh : LaserScanVisualizer
     private void Create()
     {
         LaserScan = new GameObject("LaserScanMesh");
-        LaserScan.transform.position = origin;
+        //LaserScan.transform.position = origin;
+        LaserScan.transform.position = Vector3.zero;
         LaserScan.transform.parent = gameObject.transform;
         LaserScan.AddComponent<MeshFilter>();
         MeshRenderer meshRenderer = LaserScan.AddComponent<MeshRenderer>();
@@ -47,11 +48,13 @@ public class LaserScanVisualizerMesh : LaserScanVisualizer
         if (!IsCreated)
             Create();
 
-        meshVerticies[0] = Vector3.zero;
+        //meshVerticies[0] = Vector3.zero;
+        meshVerticies[0] = origin;
         meshVertexColors[0] = Color.green;
         for (int i = 0; i < meshVerticies.Length - 1; i++)
         {
-            meshVerticies[i + 1] = ranges[i] * directions[i];
+            //meshVerticies[i + 1] = ranges[i] * directions[i]; //We use absolute values here instead.
+            meshVerticies[i + 1] = origin + ranges[i] * directions[i];
             meshVertexColors[i + 1] = GetColor(ranges[i]);
         }
         for (int i = 0; i < meshTriangles.Length / 3; i++)

@@ -35,6 +35,7 @@ namespace RosSharp.RosBridgeClient
         public float range_max = 3.5f;
         public float[] ranges ;
         public float[] intensities;
+        public LaserScanVisualizer[] visualizers;
 
         public void Start()
         {
@@ -49,10 +50,13 @@ namespace RosSharp.RosBridgeClient
         {
             MeasureDistance();
 
-            laserScanVisualizers = GetComponents<LaserScanVisualizer>();
-            if (laserScanVisualizers != null)
-                foreach(LaserScanVisualizer laserScanVisualizer in laserScanVisualizers)
+            foreach(LaserScanVisualizer laserScanVisualizer in visualizers)
                     laserScanVisualizer.SetSensorData(transform.position, directions, ranges, range_min, range_max);
+
+            // laserScanVisualizers = GetComponents<LaserScanVisualizer>(); //old code, replaced by the bit above.
+            // if (laserScanVisualizers != null)
+            //     foreach(LaserScanVisualizer laserScanVisualizer in laserScanVisualizers)
+            //         laserScanVisualizer.SetSensorData(transform.position, directions, ranges, range_min, range_max);
 
             return ranges;
         }

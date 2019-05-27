@@ -61,14 +61,14 @@ public class CarController : MonoBehaviour
 
     void Update()
     {
-        //steering = 180; //For testing
-        //speed = 250;
-        float Tan_Phi = (Mathf.Tan(Phi)!=0.0f) ? Mathf.Tan(Phi) : 0.0000001f; //Avoid Tan(Phi)=0, because it causes trouble
+        float Tan_Phi = (Mathf.Abs(Mathf.Tan(Phi))>0.000001f) ? Mathf.Tan(Phi) : 0.000001f; //Avoid Tan(Phi)=0, because it causes trouble
 
         L = Vector3.Distance(backAxle.position, frontAxle.position); // L is the distance between the front and back axle
         R = Mathf.Abs(L / Tan_Phi);
 
         float T = Vector3.Distance(frontWheel_left.position, frontWheel_right.position); //Interwheel distance
+
+
 
         float amount_of_rotation=0, lw_rot=0, rw_rot=0;
         if(Phi>0) {

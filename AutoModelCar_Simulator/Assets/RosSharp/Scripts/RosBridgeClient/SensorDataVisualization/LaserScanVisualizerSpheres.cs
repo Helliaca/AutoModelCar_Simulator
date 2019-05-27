@@ -51,7 +51,8 @@ namespace RosSharp.SensorVisualization
                 LaserScan[i].SetActive(ranges[i] != 0);
                 LaserScan[i].GetComponent<Renderer>().material.SetColor("_TintColor", GetColor(ranges[i]));
                 LaserScan[i].transform.localScale = objectWidth * Vector3.one;
-                LaserScan[i].transform.localPosition = ranges[i] * directions[i];
+                //LaserScan[i].transform.localPosition = ranges[i] * directions[i];     // Only siths deal in absolutes, and for conveniance so do we.
+                LaserScan[i].transform.position = origin + ranges[i] * directions[i];
             }
         }
 
