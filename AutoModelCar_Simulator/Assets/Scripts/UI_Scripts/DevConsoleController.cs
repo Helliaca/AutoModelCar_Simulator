@@ -63,6 +63,18 @@ public class DevConsoleController : MonoBehaviour {
 			Globals.Instance.c_marker.gameObject.SetActive(!Globals.Instance.c_marker.gameObject.activeSelf);
 			print("Circle toggled");
 		}
+		else if(cmds[0] == "toggle" && cmds[1]=="lidar_spheres") {
+			Globals.Instance.CurrentCar.lsv_spheres.enabled = !Globals.Instance.CurrentCar.lsv_spheres.enabled;
+			print("Lidar Sphere Visualization toggled");
+		}
+		else if(cmds[0] == "toggle" && cmds[1]=="lidar_lines") {
+			Globals.Instance.CurrentCar.lsv_lines.enabled = !Globals.Instance.CurrentCar.lsv_lines.enabled;
+			print("Lidar Line Visualization toggled");
+		}
+		else if(cmds[0] == "toggle" && cmds[1]=="lidar_mesh") {
+			Globals.Instance.CurrentCar.lsv_mesh.enabled = !Globals.Instance.CurrentCar.lsv_mesh.enabled;
+			print("Lidar Mesh Visualization toggled");
+		}
 		else if(cmds[0] == "toggle") {
 			GameObject obj = (GameObject) Globals.GlobalFind(cmds[1], typeof(GameObject));
 			obj.SetActive(!obj.activeSelf);

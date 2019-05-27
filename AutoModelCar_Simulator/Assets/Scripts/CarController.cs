@@ -15,6 +15,9 @@ public class CarController : MonoBehaviour
     public Transform frontWheel_left;
     public PropulsionAxle prop_axle;
     public RosConnector Connection;
+    public LaserScanVisualizerLines lsv_lines;
+    public LaserScanVisualizerMesh lsv_mesh;
+    public RosSharp.SensorVisualization.LaserScanVisualizerSpheres lsv_spheres;
 
     
     public float speed {
