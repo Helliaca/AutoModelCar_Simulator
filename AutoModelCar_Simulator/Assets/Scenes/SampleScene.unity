@@ -415,6 +415,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: car_lab_box_phys (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 3979303848079501970, guid: dd6b7aa8e457e5b499985aa9478c8811,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3979303848079013554, guid: dd6b7aa8e457e5b499985aa9478c8811,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -504,7 +509,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155446393}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.22, y: 0.1, z: -0}
+  m_LocalPosition: {x: 0.003, y: 0.1, z: 0.231}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 642038482}
@@ -956,6 +961,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6ecf028b8710d6f43a2697d907b1ea39, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 6ecf028b8710d6f43a2697d907b1ea39, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
@@ -1106,6 +1115,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: car_lab_box Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979303848079501970, guid: dd6b7aa8e457e5b499985aa9478c8811,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3979303848079013554, guid: dd6b7aa8e457e5b499985aa9478c8811,
         type: 3}
@@ -1433,6 +1447,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: car_pieces_phys (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4865329057358841481, guid: 92831baadfe73f243af674292eea8001,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4865329057359010473, guid: 92831baadfe73f243af674292eea8001,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1611,6 +1630,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: car_lab_box Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979303848079501970, guid: dd6b7aa8e457e5b499985aa9478c8811,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3979303848079013554, guid: dd6b7aa8e457e5b499985aa9478c8811,
         type: 3}
@@ -2316,6 +2340,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: car_lab_box_phys (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3979303848079501970, guid: dd6b7aa8e457e5b499985aa9478c8811,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3979303848079013554, guid: dd6b7aa8e457e5b499985aa9478c8811,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2731,6 +2760,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: car_pieces_phys (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4865329057358841481, guid: 92831baadfe73f243af674292eea8001,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4865329057359010473, guid: 92831baadfe73f243af674292eea8001,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2820,6 +2854,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: car_pieces_phys (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865329057358841481, guid: 92831baadfe73f243af674292eea8001,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4865329057359010473, guid: 92831baadfe73f243af674292eea8001,
         type: 3}
@@ -4020,6 +4059,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: car_lab_box Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 3979303848079501970, guid: dd6b7aa8e457e5b499985aa9478c8811,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3979303848079013554, guid: dd6b7aa8e457e5b499985aa9478c8811,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4760,6 +4804,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: car_lab_box Variant (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3979303848079501970, guid: dd6b7aa8e457e5b499985aa9478c8811,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3979303848079013554, guid: dd6b7aa8e457e5b499985aa9478c8811,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4867,6 +4916,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: car_lab_box Variant (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979303848079501970, guid: dd6b7aa8e457e5b499985aa9478c8811,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3979303848079013554, guid: dd6b7aa8e457e5b499985aa9478c8811,
         type: 3}
@@ -5056,6 +5110,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: car_lab_box_phys (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979303848079501970, guid: dd6b7aa8e457e5b499985aa9478c8811,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3979303848079013554, guid: dd6b7aa8e457e5b499985aa9478c8811,
         type: 3}
@@ -5973,6 +6032,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: car_lab_box_phys (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3979303848079501970, guid: dd6b7aa8e457e5b499985aa9478c8811,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3979303848079013554, guid: dd6b7aa8e457e5b499985aa9478c8811,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6291,6 +6355,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: car_lab_box Variant (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3979303848079501970, guid: dd6b7aa8e457e5b499985aa9478c8811,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3979303848079013554, guid: dd6b7aa8e457e5b499985aa9478c8811,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6379,13 +6448,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1179040128}
-  m_LocalRotation: {x: 0.1370811, y: -0.6936922, z: 0.1370811, w: 0.6936922}
+  m_LocalRotation: {x: 0.19385767, y: 0, z: 0, w: 0.9810297}
   m_LocalPosition: {x: 0.044000033, y: 0.24500002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 642038482}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 22.356, y: -90.00001, z: 0}
+  m_LocalEulerAnglesHint: {x: 22.356, y: 0, z: 0}
 --- !u!114 &1179040130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6405,6 +6474,7 @@ MonoBehaviour:
   resolutionWidth: 640
   resolutionHeight: 480
   qualityLevel: 50
+  frequency: 30
 --- !u!20 &1179040132
 Camera:
   m_ObjectHideFlags: 0
@@ -6428,20 +6498,20 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 1000
+  far clip plane: 15
   field of view: 53.130104
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 23
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
+  m_TargetDisplay: 1
   m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
+  m_HDR: 0
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
@@ -6617,6 +6687,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: car_lab_box Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979303848079501970, guid: dd6b7aa8e457e5b499985aa9478c8811,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3979303848079013554, guid: dd6b7aa8e457e5b499985aa9478c8811,
         type: 3}
@@ -7196,6 +7271,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 4393983469243714891, guid: e535de3ca4cc31b45b4cf296425bb25f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4393983469243486571, guid: e535de3ca4cc31b45b4cf296425bb25f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7679,6 +7759,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 6ecf028b8710d6f43a2697d907b1ea39, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6ecf028b8710d6f43a2697d907b1ea39, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 6ecf028b8710d6f43a2697d907b1ea39, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -8569,6 +8653,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: car_lab_box Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 3979303848079501970, guid: dd6b7aa8e457e5b499985aa9478c8811,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3979303848079013554, guid: dd6b7aa8e457e5b499985aa9478c8811,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9239,6 +9328,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: car_lab_box_phys
       objectReference: {fileID: 0}
+    - target: {fileID: 3979303848079501970, guid: dd6b7aa8e457e5b499985aa9478c8811,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3979303848079013554, guid: dd6b7aa8e457e5b499985aa9478c8811,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9482,7 +9576,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Timeout: 10
   Protocol: 0
-  RosBridgeServerUrl: ws://192.168.178.23:9090
+  RosBridgeServerUrl: ws://localhost:9090
 --- !u!114 &1794408256 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8323021318034011268, guid: f1d980a042526bd4b9d780293b178c1b,
@@ -10413,6 +10507,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: car_lab_box_phys (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979303848079501970, guid: dd6b7aa8e457e5b499985aa9478c8811,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3979303848079013554, guid: dd6b7aa8e457e5b499985aa9478c8811,
         type: 3}
@@ -11384,6 +11483,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: car_lab_box_phys (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979303848079501970, guid: dd6b7aa8e457e5b499985aa9478c8811,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3979303848079013554, guid: dd6b7aa8e457e5b499985aa9478c8811,
         type: 3}
@@ -13502,6 +13606,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 5207598578926441579, guid: 45a776ea66f0276478fae3e9e5f4f2d9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5207598578926274635, guid: 45a776ea66f0276478fae3e9e5f4f2d9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13586,6 +13695,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: car_lab_box
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979303848079501970, guid: dd6b7aa8e457e5b499985aa9478c8811,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3979303848079013554, guid: dd6b7aa8e457e5b499985aa9478c8811,
         type: 3}
@@ -13675,6 +13789,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: car_pieces_phys
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865329057358841481, guid: 92831baadfe73f243af674292eea8001,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4865329057359010473, guid: 92831baadfe73f243af674292eea8001,
         type: 3}
@@ -13776,6 +13895,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GPVFX_King
       objectReference: {fileID: 0}
+    - target: {fileID: 4659213550106630349, guid: 557421b3096e1e64abf31f0b9a56499e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4659213550106789101, guid: 557421b3096e1e64abf31f0b9a56499e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13865,6 +13989,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4393983469243714891, guid: e535de3ca4cc31b45b4cf296425bb25f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4393983469243486571, guid: e535de3ca4cc31b45b4cf296425bb25f,
         type: 3}
@@ -15855,6 +15984,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8562734574388888962, guid: a357ae8deaa7093498996a4481831589,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8562734574388402594, guid: a357ae8deaa7093498996a4481831589,
         type: 3}
