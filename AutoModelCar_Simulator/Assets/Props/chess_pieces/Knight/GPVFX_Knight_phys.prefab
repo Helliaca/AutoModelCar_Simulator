@@ -14,6 +14,21 @@ CapsuleCollider:
   m_Height: 0.005096314
   m_Direction: 1
   m_Center: {x: 0.00020965637, y: 0.002548156, z: -0.0000000012223609}
+--- !u!114 &5872549417297126380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5207598578926441579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a62b541363542ea44be4a2f226f13c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  components:
+  - reference: {fileID: 5207598578926441579}
+    type: 0
 --- !u!1001 &5207598578926408395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23,7 +38,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 4b1b985d7c66d4cba91946bc280878ce, type: 3}
       propertyPath: m_Name
-      value: GPVFX_Knight
+      value: GPVFX_Knight_phys
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4b1b985d7c66d4cba91946bc280878ce, type: 3}
       propertyPath: m_LocalPosition.x

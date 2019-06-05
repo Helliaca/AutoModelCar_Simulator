@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class DevConsoleController : MonoBehaviour {
 	public InputField input;
@@ -58,21 +59,29 @@ public class DevConsoleController : MonoBehaviour {
 				print(child.gameObject.name + " enabled: " + child.gameObject.activeSelf);
 			}
 		}
+		else if(cmds[0] == "HUD" && cmds[1]=="off") {
+			GameObject HUDcanvas = GameObject.Find("HUDCanvas");
+			foreach (Transform child in HUDcanvas.transform)
+			{
+				child.gameObject.SetActive(false);
+				print(child.gameObject.name + " enabled: " + child.gameObject.activeSelf);
+			}
+		}
 		else if(cmds[0] == "toggle" && cmds[1]=="Circle") {
 			Globals.Instance.CircleDraw.gameObject.SetActive(!Globals.Instance.CircleDraw.gameObject.activeSelf);
 			Globals.Instance.c_marker.gameObject.SetActive(!Globals.Instance.c_marker.gameObject.activeSelf);
 			print("Circle toggled");
 		}
 		else if(cmds[0] == "toggle" && cmds[1]=="lidar_spheres") {
-			Globals.Instance.CurrentCar.lsv_spheres.enabled = !Globals.Instance.CurrentCar.lsv_spheres.enabled;
+			Globals.Instance.lsv_spheres.enabled = !Globals.Instance.lsv_spheres.enabled;
 			print("Lidar Sphere Visualization toggled");
 		}
 		else if(cmds[0] == "toggle" && cmds[1]=="lidar_lines") {
-			Globals.Instance.CurrentCar.lsv_lines.enabled = !Globals.Instance.CurrentCar.lsv_lines.enabled;
+			Globals.Instance.lsv_lines.enabled = !Globals.Instance.lsv_lines.enabled;
 			print("Lidar Line Visualization toggled");
 		}
 		else if(cmds[0] == "toggle" && cmds[1]=="lidar_mesh") {
-			Globals.Instance.CurrentCar.lsv_mesh.enabled = !Globals.Instance.CurrentCar.lsv_mesh.enabled;
+			Globals.Instance.lsv_mesh.enabled = !Globals.Instance.lsv_mesh.enabled;
 			print("Lidar Mesh Visualization toggled");
 		}
 		else if(cmds[0] == "toggle") {
@@ -81,12 +90,44 @@ public class DevConsoleController : MonoBehaviour {
 			print(obj.name + " enabled: " + obj.activeSelf);
 		}
 		else if(cmds[0] == "set_speed") {
-			Globals.Instance.CurrentCar.speed = float.Parse(cmds[1]);
+			Globals.Instance.CurrentCar.backAxle.speed_topic = float.Parse(cmds[1]);
 			print("Setting speed to " + cmds[1]);
 		}
 		else if(cmds[0] == "set_steering") {
-			Globals.Instance.CurrentCar.steering = float.Parse(cmds[1]);
+			Globals.Instance.CurrentCar.frontAxle.steering_topic = float.Parse(cmds[1]);
 			print("Setting steering to " + cmds[1]);
+		}
+		else if(cmds[0] == "load" && cmds[1]== "scene") {
+			SceneManager.LoadScene("scene_simple", LoadSceneMode.Single);
+			Globals.Instance.PorpList.refresh_props();
+		}
+		else if(cmds[0] == "load" && cmds[1]== "scene_complex") {
+			SceneManager.LoadScene("scene_complex", LoadSceneMode.Single);
+			Globals.Instance.PorpList.refresh_props();
+		}
+		else if(cmds[0] == "rst") {
+			execute("HUD off");
+			Globals.Instance.CircleDraw.gameObject.SetActive(false);
+			Globals.Instance.c_marker.gameObject.SetActive(false);
+			Globals.Instance.lsv_spheres.enabled = false;
+			Globals.Instance.lsv_mesh.enabled = false;
+			Globals.Instance.lsv_lines.enabled = false;
+		}
+		else if(cmds[0] == "HUD" && cmds[1] == "basic") {
+			execute("toggle FPS_Graph");
+			execute("toggle Speed_Graph");
+			execute("toggle Steering_Graph");
+			execute("toggle Location_Graph");
+			execute("toggle Ack_Graph");
+		}
+		else if(cmds[0]=="pause") {
+			Time.timeScale = 0.0f;
+		}
+		else if(cmds[0]=="unpause") {
+			Time.timeScale = 1.0f;
+		}
+		else if(cmds[0]=="scc") { //Set current car
+			Globals.Instance.CurrentCar = (CarController)Globals.GlobalFind(cmds[1], typeof(CarController));
 		}
 		else {
 			print("Command not recognized: " + command);
@@ -105,7 +146,7 @@ public class DevConsoleController : MonoBehaviour {
 	}
 
 	public void error(string s) {
-		output_s += "\n! <color=red>" + s + "</color>";
+		output_s += "\n! <color=red><b>ERR:</b> " + s + "</color>";
 	}
 
 	public void show() {

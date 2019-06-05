@@ -26,10 +26,10 @@ public class GraphController : MonoBehaviour
                     return Globals.Instance.CurrentCar.transform.position.z;
                 }
                 case AxisValue.CAR_SPEED : {
-                    return Globals.Instance.CurrentCar.speed;
+                    return Globals.Instance.CurrentCar.backAxle.speed_topic;
                 }
                 case AxisValue.CAR_STEERING : {
-                    return Globals.Instance.CurrentCar.steering;
+                    return Globals.Instance.CurrentCar.frontAxle.steering_topic;
                 }
                 case AxisValue.SYS_FPS : {
                     return 1.0f / Time.deltaTime;

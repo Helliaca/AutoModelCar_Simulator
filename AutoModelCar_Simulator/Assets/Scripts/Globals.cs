@@ -8,7 +8,9 @@ public class Globals : MonoBehaviour {
 
 	public static Globals Instance { get; private set; }
 
+	public RosSharp.RosBridgeClient.RosConnector Connection;
 	public DevConsoleController DevConsole;
+	public GraphEditor gEditor;
 	public KeyFrameEditor kfEditor;
 
 	public CarController CurrentCar;
@@ -17,6 +19,13 @@ public class Globals : MonoBehaviour {
 	public Transform c_marker;
 	public Camera UI_GRAPH_CAMERA;
 	public AckController Ack_HUD;
+	public UIListController ComponentList;
+	public UIListController PorpList;
+	public ContextPanelController ContextPanel;
+	public SpaceHandleController spaceHandle;
+	public LaserScanVisualizerLines lsv_lines;
+    public LaserScanVisualizerMesh lsv_mesh;
+    public RosSharp.SensorVisualization.LaserScanVisualizerSpheres lsv_spheres;
 
 	void Awake()
 	{
@@ -30,7 +39,7 @@ public class Globals : MonoBehaviour {
 	}
 
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.Comma)) DevConsole.toggle();
+		if(Input.GetKeyDown(KeyCode.Tab)) DevConsole.toggle();
 	}
 
 	public static Object GlobalFind(string name, System.Type type)

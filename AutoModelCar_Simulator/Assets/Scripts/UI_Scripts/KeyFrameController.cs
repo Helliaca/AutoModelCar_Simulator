@@ -15,6 +15,8 @@ public class KeyFrameController : MonoBehaviour, IPointerDownHandler, IPointerUp
     public Keyframe key { get {return reference.keys[ac_index];} }
     private int ac_index;
     private bool isPressed = false;
+    private float min_x, max_x, min_y, max_y;
+    private float delta_x, delta_y;
 
     public float leftTangent;
     public float rightTangent;
@@ -27,11 +29,26 @@ public class KeyFrameController : MonoBehaviour, IPointerDownHandler, IPointerUp
         leftTangent_mode = rightTangent_mode = AnimationUtility.TangentMode.Free;
     }
 
-    public void init(RectTransform canvas, AnimationCurve reference, int index) {
+    public void init(RectTransform canvas, AnimationCurve reference, int index, float min_x, float max_x, float min_y, float max_y) {
         transform.SetParent(canvas.transform, false);
         this.canvas = canvas;
         this.reference = reference;
         this.ac_index = index;
+        this.min_x = min_x;
+        this.max_x = max_x;
+        this.min_y = min_y;
+        this.max_y = max_y;
+        this.delta_x = Mathf.Abs(max_x-min_x);
+        this.delta_y = Mathf.Abs(max_y-min_y);
+    }
+
+    public void updateAxesIntervals(float min_x, float max_x, float min_y, float max_y) {
+        this.min_x = min_x;
+        this.max_x = max_x;
+        this.min_y = min_y;
+        this.max_y = max_y;
+        this.delta_x = Mathf.Abs(max_x-min_x);
+        this.delta_y = Mathf.Abs(max_y-min_y);
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -78,7 +95,7 @@ public class KeyFrameController : MonoBehaviour, IPointerDownHandler, IPointerUp
 
             Vector3 np = Input.mousePosition - offset;
 
-            if(np.y > 0 && np.y < canvas.rect.height && np.x > Mathf.Max(0, reference.keys[ac_index-1].time*canvas.rect.width) && np.x < Mathf.Min(canvas.rect.width, reference.keys[ac_index+1].time*canvas.rect.width)) {
+            if(np.y > 0 && np.y < canvas.rect.height && np.x > Mathf.Max(0, reference.keys[ac_index-1].time/delta_x*canvas.rect.width) && np.x < Mathf.Min(canvas.rect.width, reference.keys[ac_index+1].time/delta_x*canvas.rect.width)) {
                 self.anchoredPosition = np;
 
                 forceUpdate();
@@ -91,8 +108,8 @@ public class KeyFrameController : MonoBehaviour, IPointerDownHandler, IPointerUp
 
     public void forceUpdate() {
         Keyframe[] keys = reference.keys; // Get a copy of the array
-        keys[ac_index].time = self.anchoredPosition.x / canvas.rect.width;
-        keys[ac_index].value = self.anchoredPosition.y / canvas.rect.height;
+        keys[ac_index].time = delta_x * self.anchoredPosition.x / canvas.rect.width;
+        keys[ac_index].value = delta_y * self.anchoredPosition.y / canvas.rect.height;
         keys[ac_index].inTangent = leftTangent;
         keys[ac_index].outTangent = rightTangent;
         reference.keys = keys; // assign the array back to the property
@@ -101,6 +118,6 @@ public class KeyFrameController : MonoBehaviour, IPointerDownHandler, IPointerUp
     }
 
     Vector3 toCanvasSpace(float x, float y) {
-        return new Vector3(canvas.rect.width*(x)/(1.0f), canvas.rect.height*(y)/(1.0f), 0.0f);
+        return new Vector3(canvas.rect.width*(x)/delta_x, canvas.rect.height*(y)/delta_y, 0.0f);
     }
 }

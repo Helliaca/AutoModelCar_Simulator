@@ -44,10 +44,21 @@ namespace RosSharp.RosBridgeClient
             intensities = new float[samples];
             rays = new Ray[samples];
             raycastHits = new RaycastHit[samples];
+            
+            visualizers = new LaserScanVisualizer[] {Globals.Instance.lsv_lines, Globals.Instance.lsv_mesh, Globals.Instance.lsv_spheres};
         }
 
         public float[] Scan()
         {
+            // if sample number was changed we need to re-initialize all arrays to the appropriate length.
+            if(samples!=directions.Length) {
+                directions = new Vector3[samples];
+                ranges = new float[samples];
+                intensities = new float[samples];
+                rays = new Ray[samples];
+                raycastHits = new RaycastHit[samples];
+            }
+
             MeasureDistance();
 
             foreach(LaserScanVisualizer laserScanVisualizer in visualizers)

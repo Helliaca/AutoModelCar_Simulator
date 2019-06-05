@@ -22,10 +22,17 @@ namespace RosSharp.RosBridgeClient
     {
         public RosConnector Connection;
         public string Topic;
+        // public string Topic {
+        //     get { return _topic; }
+        //     //set { _topic = value; publicationId = Connection.RosSocket.Advertise<T>(_topic); }
+        //     set { _topic = value; publicationId = Connection.RosSocket.Advertise<T>(_topic); }
+        // }
+        //private string _topic;
         private string publicationId;
 
         protected virtual void Start()
         {
+            if(!Connection) Connection = Globals.Instance.Connection;
             //publicationId = GetComponent<RosConnector>().RosSocket.Advertise<T>(Topic);
             publicationId = Connection.RosSocket.Advertise<T>(Topic);
         }

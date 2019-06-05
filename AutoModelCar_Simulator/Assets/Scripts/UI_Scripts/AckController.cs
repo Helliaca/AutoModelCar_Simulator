@@ -32,9 +32,9 @@ public class AckController : MonoBehaviour
         C_t.text = "C: " + C.ToString();
         Angvel_t.text = "Angular Velocity: " + angvel.ToString("F3") + "°/s";
 
-        steering_t.text = "/steering: " + Globals.Instance.CurrentCar.steering.ToString();
-        speed_t.text = "/speed: " + Globals.Instance.CurrentCar.speed.ToString();
-        speed_r_t.text = "Speed: " + Globals.Instance.CurrentCar.speed_real.ToString("F3") + "m/s";
+        steering_t.text = "/steering: " + Globals.Instance.CurrentCar.frontAxle.steering_topic.ToString();
+        speed_t.text = "/speed: " + Globals.Instance.CurrentCar.backAxle.speed_topic.ToString();
+        speed_r_t.text = "Speed: " + Globals.Instance.CurrentCar.backAxle.speed_real.ToString("F3") + "m/s";
         pos_t.text = "Position: " + Globals.Instance.CurrentCar.transform.position.ToString();
 
     }

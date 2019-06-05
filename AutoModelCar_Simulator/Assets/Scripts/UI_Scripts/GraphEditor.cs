@@ -5,16 +5,32 @@ using UnityEditor;
 
 public class GraphEditor : MonoBehaviour
 {
-    public AnimationCurve curve;
+    private AnimationCurve curve;
     public int bez_resolution = 15;
     public LineRenderer line;
     public RectTransform canvas;
     public bool scaleWithDelta = true;
     public RectTransform KeyframePrefab;
     private List<KeyFrameController> keyFrameObjs = new List<KeyFrameController>();
+    private float min_x=0.0f, min_y=0.0f, max_x=1.0f, max_y=1.0f;
     void Start()
     {
         UpdateKeyframeObjects();
+    }
+
+    public void setCurve(AnimationCurve c) {
+        curve = c;
+        UpdateAxesIntervals();
+        UpdateKeyframeObjects();
+    }
+
+    void UpdateAxesIntervals() {
+        foreach(Keyframe k in curve.keys) {
+            if(k.time<min_x) min_x=k.time;
+            if(k.time>max_x) max_x=k.time;
+            if(k.value<min_y) min_y=k.value;
+            if(k.value>max_y) max_y=k.value;
+        }
     }
 
     void UpdateKeyframeObjects() {
@@ -26,7 +42,7 @@ public class GraphEditor : MonoBehaviour
             Keyframe f = curve[i];
             RectTransform o = Instantiate(KeyframePrefab, Vector3.zero, Quaternion.identity, canvas);
             KeyFrameController kfc = o.transform.GetComponent<KeyFrameController>();
-            kfc.init(canvas, curve, i);
+            kfc.init(canvas, curve, i, min_x, max_x, min_y, max_y);
             keyFrameObjs.Add(kfc);
         }
     }
@@ -41,7 +57,7 @@ public class GraphEditor : MonoBehaviour
             else offset = canvas.position;
 
             Vector3 np = Input.mousePosition - offset;
-            curve.AddKey(np.x / canvas.rect.width, curve.Evaluate(np.x / canvas.rect.width));
+            curve.AddKey(Mathf.Abs(max_x-min_x)*(np.x/canvas.rect.width), Mathf.Abs(max_y-min_y)*curve.Evaluate(np.x / canvas.rect.width));
             UpdateKeyframeObjects();
         }
 
@@ -81,6 +97,6 @@ public class GraphEditor : MonoBehaviour
     }
 
     Vector3 toCanvasSpace(Vector3 v) {
-        return new Vector3(canvas.rect.width*(v.x)/(1.0f), canvas.rect.height*(v.y)/(1.0f), 0.0f);
+        return new Vector3(canvas.rect.width*(v.x)/(Mathf.Abs(max_x-min_x)), canvas.rect.height*(v.y)/(Mathf.Abs(max_y-min_y)), 0.0f);
     }
 }
