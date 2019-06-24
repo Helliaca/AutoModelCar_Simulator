@@ -1393,8 +1393,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: ToggleSelect
+      - m_Target: {fileID: 1580630357}
+        m_MethodName: add_Camera
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5251,7 +5251,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1574193314}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1580630352}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47bd6dffb2518fd42b0e15c4ca039ff8, type: 3}
@@ -7409,8 +7409,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: ToggleSelect
+      - m_Target: {fileID: 1580630357}
+        m_MethodName: add_LaserScanner
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18803,7 +18803,7 @@ PrefabInstance:
     - target: {fileID: 7423805935231781171, guid: 08ea5728e1655364cb42d741374d7b35,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: -441
+      value: -144
       objectReference: {fileID: 0}
     - target: {fileID: 7423805935231781171, guid: 08ea5728e1655364cb42d741374d7b35,
         type: 3}
@@ -26300,12 +26300,12 @@ PrefabInstance:
     - target: {fileID: 7423805935231781171, guid: 08ea5728e1655364cb42d741374d7b35,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 620
+      value: 545
       objectReference: {fileID: 0}
     - target: {fileID: 7423805935231781171, guid: 08ea5728e1655364cb42d741374d7b35,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -361
+      value: -273
       objectReference: {fileID: 0}
     - target: {fileID: 7423805935231781171, guid: 08ea5728e1655364cb42d741374d7b35,
         type: 3}
@@ -26315,7 +26315,7 @@ PrefabInstance:
     - target: {fileID: 7423805935231781171, guid: 08ea5728e1655364cb42d741374d7b35,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: -639
+      value: -342
       objectReference: {fileID: 0}
     - target: {fileID: 7423805935231781171, guid: 08ea5728e1655364cb42d741374d7b35,
         type: 3}
@@ -26446,6 +26446,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1580630357}
+    - target: {fileID: 1024171249056446559, guid: 08ea5728e1655364cb42d741374d7b35,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: add_GPS
       objectReference: {fileID: 0}
     - target: {fileID: 6549968732508998630, guid: 08ea5728e1655364cb42d741374d7b35,
         type: 3}
@@ -26788,6 +26793,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1576855782}
   m_CullTransparentMesh: 0
+--- !u!1 &1580630352 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5502352189966825427, guid: 08ea5728e1655364cb42d741374d7b35,
+    type: 3}
+  m_PrefabInstance: {fileID: 1574193314}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1580630357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580630352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eebb755d2ba4d74c96936b81f50ce7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1607856540 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 8c53a2ec2db19254bb1cedd29219c246,
@@ -28872,6 +28895,13 @@ MonoBehaviour:
   lsv_lines: {fileID: 1610660070}
   lsv_mesh: {fileID: 566598177}
   lsv_spheres: {fileID: 449329776}
+  GPS_prefab: {fileID: 5565965000589914782, guid: 273b424ba5baba54e8da6ee10ebf8e88,
+    type: 3}
+  LaserScanner_prefab: {fileID: 4053207424166315356, guid: 0fba581dd126e9d4ba5aad4db75479ff,
+    type: 3}
+  Camera_prefab: {fileID: 8793737984178190250, guid: 7c55082ec30ce3f448cd9d922e8a79c7,
+    type: 3}
+  Selected_Prop: {fileID: 0}
 --- !u!4 &1779272837
 Transform:
   m_ObjectHideFlags: 0
@@ -39698,6 +39728,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: CarContainer
       objectReference: {fileID: 0}
+    - target: {fileID: 7569569670267795684, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: lsv_lines
+      value: 
+      objectReference: {fileID: 1610660070}
+    - target: {fileID: 7569569670267795684, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: lsv_mesh
+      value: 
+      objectReference: {fileID: 566598177}
+    - target: {fileID: 7569569670267795684, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: lsv_spheres
+      value: 
+      objectReference: {fileID: 449329776}
+    - target: {fileID: 6176116824109086304, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: visualizers.Array.data[0]
+      value: 
+      objectReference: {fileID: 1610660070}
+    - target: {fileID: 6176116824109086304, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: visualizers.Array.data[1]
+      value: 
+      objectReference: {fileID: 449329776}
+    - target: {fileID: 6176116824109086304, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: visualizers.Array.data[2]
+      value: 
+      objectReference: {fileID: 566598177}
     - target: {fileID: 6456349324319097796, guid: 25b22254b6366084688e7f91d4e92b8a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -39753,21 +39813,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7569569670267795684, guid: 25b22254b6366084688e7f91d4e92b8a,
-        type: 3}
-      propertyPath: lsv_lines
-      value: 
-      objectReference: {fileID: 1610660070}
-    - target: {fileID: 7569569670267795684, guid: 25b22254b6366084688e7f91d4e92b8a,
-        type: 3}
-      propertyPath: lsv_mesh
-      value: 
-      objectReference: {fileID: 566598177}
-    - target: {fileID: 7569569670267795684, guid: 25b22254b6366084688e7f91d4e92b8a,
-        type: 3}
-      propertyPath: lsv_spheres
-      value: 
-      objectReference: {fileID: 449329776}
     - target: {fileID: 3173730300920320637, guid: 25b22254b6366084688e7f91d4e92b8a,
         type: 3}
       propertyPath: Connection
@@ -39783,21 +39828,6 @@ PrefabInstance:
       propertyPath: Connection
       value: 
       objectReference: {fileID: 1779272840}
-    - target: {fileID: 6176116824109086304, guid: 25b22254b6366084688e7f91d4e92b8a,
-        type: 3}
-      propertyPath: visualizers.Array.data[0]
-      value: 
-      objectReference: {fileID: 1610660070}
-    - target: {fileID: 6176116824109086304, guid: 25b22254b6366084688e7f91d4e92b8a,
-        type: 3}
-      propertyPath: visualizers.Array.data[1]
-      value: 
-      objectReference: {fileID: 449329776}
-    - target: {fileID: 6176116824109086304, guid: 25b22254b6366084688e7f91d4e92b8a,
-        type: 3}
-      propertyPath: visualizers.Array.data[2]
-      value: 
-      objectReference: {fileID: 566598177}
     - target: {fileID: 4985398925405447787, guid: 25b22254b6366084688e7f91d4e92b8a,
         type: 3}
       propertyPath: Connection

@@ -33,6 +33,13 @@ public class UIListController : MonoBehaviour
         }
     }
 
+    public void refresh_components(PropComponentGroup group) {
+        Flush();
+        foreach(PropComponent c in group.components) {
+            Globals.Instance.ComponentList.Add_Component(c);
+        }
+    }
+
     
     void Update()
     {

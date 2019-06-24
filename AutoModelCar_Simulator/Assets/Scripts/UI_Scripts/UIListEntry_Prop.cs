@@ -21,7 +21,6 @@ public class UIListEntry_Prop : UIListEntry
     }
 
     public override void Select() {
-        Globals.Instance.ComponentList.Flush();
 
         if(!reference) { Globals.Instance.DevConsole.error("UIListEntry_Prop does not have a reference!"); return; }
         PropComponentGroup group = reference.GetComponent<PropComponentGroup>();
@@ -31,11 +30,10 @@ public class UIListEntry_Prop : UIListEntry
             Globals.Instance.CurrentCar = reference.GetComponent<CarController>();
         }
 
-        foreach(PropComponent c in group.components) {
-            Globals.Instance.ComponentList.Add_Component(c);
-        }
+        Globals.Instance.ComponentList.refresh_components(group);
 
         Globals.Instance.spaceHandle.setPos(reference.transform.position);
+        Globals.Instance.Selected_Prop = this;
 
         base.Select();
     }

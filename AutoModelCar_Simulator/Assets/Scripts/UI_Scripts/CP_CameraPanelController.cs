@@ -81,9 +81,11 @@ public class CP_CameraPanelController : CP_PanelController
     }
 
     public override void set_reference(Transform o) {
+        OnDisable();    //We simulate turning the panel on and off when we switch refernce to keep cam.targetTexture up to speed.
         reference = o;
         cam_topic = o.GetComponent<RosSharp.RosBridgeClient.ImagePublisher>();
         cam = cam_topic.ImageCamera;
+        OnEnable();
     }
 
     public void changeFov(float val) {
@@ -96,13 +98,13 @@ public class CP_CameraPanelController : CP_PanelController
 
     void OnDisable()
     {
-        cam.targetTexture = null;
-        cam_topic.enabled = true;
+        if(cam!=null) cam.targetTexture = null;
+        if(cam_topic!=null) cam_topic.enabled = true;
     }
 
     void OnEnable()
     {
-        cam_topic.enabled = false;
-        cam.targetTexture = footage_tex;
+        if(cam_topic!=null) cam_topic.enabled = false;
+        if(cam!=null) cam.targetTexture = footage_tex;
     }
 }

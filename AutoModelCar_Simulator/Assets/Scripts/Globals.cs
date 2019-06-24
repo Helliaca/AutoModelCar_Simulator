@@ -27,6 +27,11 @@ public class Globals : MonoBehaviour {
     public LaserScanVisualizerMesh lsv_mesh;
     public RosSharp.SensorVisualization.LaserScanVisualizerSpheres lsv_spheres;
 
+	public GameObject GPS_prefab;
+    public GameObject LaserScanner_prefab;
+    public GameObject Camera_prefab;
+	public UIListEntry_Prop Selected_Prop;
+
 	void Awake()
 	{
 		if(Instance != null) GameObject.Destroy(Instance);
