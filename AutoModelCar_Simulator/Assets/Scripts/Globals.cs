@@ -44,6 +44,7 @@ public class Globals : MonoBehaviour {
 	}
 
 	void Update () {
+		if(Input.GetKeyDown(KeyCode.LeftControl)) DevConsole.toggle();
 		if(Input.GetKeyDown(KeyCode.Tab)) DevConsole.toggle();
 	}
 
