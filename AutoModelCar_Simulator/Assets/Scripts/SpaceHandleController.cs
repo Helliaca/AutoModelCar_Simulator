@@ -19,6 +19,8 @@ public class SpaceHandleController : MonoBehaviour
             RaycastHit hit;
             Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(r, out hit, Mathf.Infinity)) {
+                Globals.Instance.PorpList.DeSelectAll();
+                Globals.Instance.ComponentList.DeSelectAll();
                 handleObject.gameObject.SetActive(true);
                 handleObject.position = hit.point;
             }

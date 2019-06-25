@@ -24,6 +24,10 @@ public class UIListController : MonoBehaviour
         }
     }
 
+    public void DeSelectAll() {
+        foreach(UIListEntry e in entries) e.DeSelect();
+    }
+
     public void refresh_props() {
         Flush();
         Object[] objs = GameObject.FindObjectsOfType(typeof(PropComponentGroup));

@@ -20,6 +20,11 @@ public class UIListEntry_Prop : UIListEntry
         GameObject.Destroy(gameObject);
     }
 
+    public override void Update()
+    {
+        if(is_selected) Globals.Instance.spaceHandle.setPos(reference.transform.position);
+    }
+
     public override void Select() {
 
         if(!reference) { Globals.Instance.DevConsole.error("UIListEntry_Prop does not have a reference!"); return; }

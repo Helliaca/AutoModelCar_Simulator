@@ -9,7 +9,7 @@ public abstract class UIListEntry : MonoBehaviour
     public Text entryPanel_text;
     public Text entryPanel_symbol;
     public string id;
-    private bool is_selected = false;
+    protected bool is_selected = false;
     public static UIListEntry last_selected;
     
     public virtual void Start()
@@ -18,9 +18,9 @@ public abstract class UIListEntry : MonoBehaviour
         entryPanel_text.text = id;
     }
 
-    
-    void Update()
+    public virtual void Update()
     {
+
     }
 
     public virtual void Delete() {

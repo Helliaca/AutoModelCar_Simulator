@@ -43,6 +43,11 @@ public class UIListEntry_Component : UIListEntry
         base.Start();
     }
 
+    public override void Update()
+    {
+        if(is_selected) Globals.Instance.spaceHandle.setPos(reference.reference.transform.position);
+    }
+
     public override void Delete() {
         Globals.Instance.ContextPanel.gameObject.SetActive(false);
         GameObject.Destroy(gameObject);
@@ -52,6 +57,5 @@ public class UIListEntry_Component : UIListEntry
         base.Select();
         Globals.Instance.ContextPanel.gameObject.SetActive(true);
         Globals.Instance.ContextPanel.setComponent(reference);
-        Globals.Instance.spaceHandle.setPos(reference.reference.transform.position);
     }
 }

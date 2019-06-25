@@ -11,6 +11,7 @@ public class GPSController : MonoBehaviour
     public RosConnector Connection;
     public float odom_frequency = 30;
     public string topic = "/localization/odom/5";
+    public Vector3 origin;
     private string odom_pub;
     private float stime;
 
@@ -24,7 +25,7 @@ public class GPSController : MonoBehaviour
 
         nav_msgs.Odometry co = new nav_msgs.Odometry();
         co.pose.pose.position = new geo_msgs.Point();
-        Vector3 pos = RosSharp.TransformExtensions.Unity2Ros(transform.position);
+        Vector3 pos = RosSharp.TransformExtensions.Unity2Ros(origin + transform.position);
         co.pose.pose.position.x = pos.x;
         co.pose.pose.position.y = pos.y;
         co.pose.pose.position.z = pos.z;
