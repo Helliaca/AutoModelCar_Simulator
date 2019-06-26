@@ -149,6 +149,10 @@ public class DevConsoleController : MonoBehaviour {
 		output_s += "\n! <color=red><b>ERR:</b> " + s + "</color>";
 	}
 
+	public void warn(string s) {
+		output_s += "\n! <color=yellow><b>WRN:</b> " + s + "</color>";
+	}
+
 	public void show() {
 		consoleContainer.SetActive(true);
 		input.Select();

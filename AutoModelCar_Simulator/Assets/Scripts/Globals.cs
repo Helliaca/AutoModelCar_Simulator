@@ -30,6 +30,7 @@ public class Globals : MonoBehaviour {
 	public GameObject GPS_prefab;
     public GameObject LaserScanner_prefab;
     public GameObject Camera_prefab;
+	public GameObject CollisionDetection_prefab;
 	public UIListEntry_Prop Selected_Prop;
 
 	void Awake()

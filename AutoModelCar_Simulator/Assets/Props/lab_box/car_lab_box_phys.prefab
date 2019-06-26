@@ -25,6 +25,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62b541363542ea44be4a2f226f13c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Component_Container: {fileID: 0}
   components:
   - reference: {fileID: 3979303848079501970}
     type: 0
@@ -41,11 +42,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 8d636bf52e1905d4da6de9dde0db29b0, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 8d636bf52e1905d4da6de9dde0db29b0, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8d636bf52e1905d4da6de9dde0db29b0, type: 3}
       propertyPath: m_LocalPosition.x

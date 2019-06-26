@@ -80,7 +80,7 @@ namespace RosSharp.RosBridgeClient
 
             for (int i = 0; i < samples; i++)
             {
-                rays[i] = new Ray(transform.position, new Vector3(Mathf.Cos(angle_min + angle_increment * i), 0, Mathf.Sin(angle_min + angle_increment * i)));
+                rays[i] = new Ray(transform.position, transform.rotation * new Vector3(Mathf.Cos(angle_min + angle_increment * i), 0, Mathf.Sin(angle_min + angle_increment * i)));
                 directions[i] = rays[i].direction;
                 raycastHits[i] = new RaycastHit();
                 if (Physics.Raycast(rays[i], out raycastHits[i], range_max))

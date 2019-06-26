@@ -38,6 +38,11 @@ public class UIListEntry_Component : UIListEntry
                 this.entryPanel_symbol.text = ((char)int.Parse("f5a0", System.Globalization.NumberStyles.HexNumber)).ToString();
                 break;
             }
+            case PropComponent.ComponentType.COLLISIONDETECTION : {
+                this.id = "CollisionDetection";
+                this.entryPanel_symbol.text = ((char)int.Parse("f009", System.Globalization.NumberStyles.HexNumber)).ToString();
+                break;
+            }
             default : { break; }
         }
         base.Start();

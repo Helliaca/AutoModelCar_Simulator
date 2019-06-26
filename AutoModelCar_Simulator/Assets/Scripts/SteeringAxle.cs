@@ -19,20 +19,27 @@ public class SteeringAxle : MonoBehaviour
     }
 
     public float steering_topic {
-        set { _steering_topic = value; _steering_real = steering_interp.Evaluate(value); }
+        set { _steering_topic = value; _steering_real_prev=_steering_real; _steering_real = steering_interp.Evaluate(value); accel_stime = Time.time; }
         get { return _steering_topic; }
     }
     public float steering_real_deg {
-        get { return _steering_real; }
+        get { 
+            float delta = Mathf.Abs(_steering_real-_steering_real_prev) == 0 ? float.MinValue : Mathf.Abs(_steering_real-_steering_real_prev);
+            return _steering_real_prev + (_steering_real-_steering_real_prev)*acceleration_curve.Evaluate((Time.time - accel_stime)*(AvgDegPerSecond/delta)); 
+        }
     }
 
     public float steering_real_rad {
-        get { return _steering_real*Mathf.Deg2Rad; }
+        get { return steering_real_deg*Mathf.Deg2Rad; }
     }
 
     private float _steering_real=0, _steering_topic=0;
 
     private string steering_sub;
+    private float accel_stime;
+    private float _steering_real_prev;
+    public float AvgDegPerSecond = 50.0f; //rough estimate
+
 
 
     public void set_wheel_rotations(float left_phi, float right_phi) {
