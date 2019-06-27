@@ -19,17 +19,24 @@ public class PropulsionAxle : MonoBehaviour
     }
 
     public float speed_topic {
-        set { _speed_topic = value; _speed_real_prev = _speed_real; _speed_real = speed_interp.Evaluate(value); accel_stime = Time.time; }
+        set { 
+            _speed_topic = value;
+            _speed_real_prev = last_frame_real_speed; 
+            _speed_real = speed_interp.Evaluate(value);
+            Debug.Log(_speed_real);
+            accel_stime = Time.time;
+         }
         get { return _speed_topic; }
     }
     public float speed_real {
         get { return _speed_real_prev + (_speed_real-_speed_real_prev)*acceleration_curve.Evaluate(Time.time - accel_stime); }
     }
 
-    private float _speed_real=0, _speed_topic=0;
+    private float _speed_real=0, _speed_topic;
     private string speed_sub;
-    private float accel_stime;
-    private float _speed_real_prev;
+    private float accel_stime = 0.0f;
+    private float _speed_real_prev = 0.0f;
+    private float last_frame_real_speed = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -41,12 +48,12 @@ public class PropulsionAxle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        last_frame_real_speed = speed_real;
     }
 
     private void speed_callback(std_msgs.Int16 data) {
-        speed_topic = (float)data.data;
         //Globals.Instance.DevConsole.print("New speed: " + data.data);
+        speed_topic = (float)data.data;
     }
 
     public void stop() {

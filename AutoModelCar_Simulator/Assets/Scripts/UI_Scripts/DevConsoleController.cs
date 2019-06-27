@@ -105,6 +105,10 @@ public class DevConsoleController : MonoBehaviour {
 			SceneManager.LoadScene("scene_complex", LoadSceneMode.Single);
 			Globals.Instance.PorpList.refresh_props();
 		}
+		else if(cmds[0] == "load" && cmds[1]== "scene_min") {
+			SceneManager.LoadScene("scene_lab_min", LoadSceneMode.Single);
+			Globals.Instance.PorpList.refresh_props();
+		}
 		else if(cmds[0] == "rst") {
 			execute("HUD off");
 			Globals.Instance.CircleDraw.gameObject.SetActive(false);

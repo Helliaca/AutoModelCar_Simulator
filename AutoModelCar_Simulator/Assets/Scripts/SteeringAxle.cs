@@ -19,13 +19,15 @@ public class SteeringAxle : MonoBehaviour
     }
 
     public float steering_topic {
-        set { _steering_topic = value; _steering_real_prev=_steering_real; _steering_real = steering_interp.Evaluate(value); accel_stime = Time.time; }
+        set { 
+            _steering_topic = value;
+            _steering_goal = steering_interp.Evaluate(value); 
+        }
         get { return _steering_topic; }
     }
     public float steering_real_deg {
         get { 
-            float delta = Mathf.Abs(_steering_real-_steering_real_prev) == 0 ? float.MinValue : Mathf.Abs(_steering_real-_steering_real_prev);
-            return _steering_real_prev + (_steering_real-_steering_real_prev)*acceleration_curve.Evaluate((Time.time - accel_stime)*(AvgDegPerSecond/delta)); 
+            return _steering_real;
         }
     }
 
@@ -33,12 +35,20 @@ public class SteeringAxle : MonoBehaviour
         get { return steering_real_deg*Mathf.Deg2Rad; }
     }
 
-    private float _steering_real=0, _steering_topic=0;
+    private float _steering_topic;
 
     private string steering_sub;
-    private float accel_stime;
-    private float _steering_real_prev;
+    private float accel_stime=0.001f;
+    private float _steering_curve_start=0.001f;
+    private float _steering_goal = 0.01f;
+    private float _steering_real= 0.01f;
+    private float last_frame_real_steering = 0.0f;
+    private float ang_speed = 0.0f, ang_accel = 0.0f;
     public float AvgDegPerSecond = 50.0f; //rough estimate
+
+    public float accl_mul = 0.0f;
+    public float speed_damp = 0.9f;
+    public float speed_mul = 0.01f;
 
 
 
@@ -55,9 +65,14 @@ public class SteeringAxle : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        ang_accel = (_steering_goal - _steering_real) * accl_mul;
+        ang_speed += ang_accel;
+        ang_speed *= speed_damp;
+        _steering_real += ang_speed * speed_mul;
+
+        last_frame_real_steering = steering_real_deg;
     }
 
     private void steering_callback(std_msgs.UInt8 data) {
