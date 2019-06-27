@@ -38,14 +38,4 @@ public class CP_SteerAxlePanelController : CP_PanelController
         }
         catch(System.Exception e) {Globals.Instance.DevConsole.error("Exception occurred while reading TransformPanel Components: " + e.ToString());}
     }
-
-    public void openValueCurveGraph() {
-        Globals.Instance.gEditor.setCurve(axle.steering_interp);
-        Globals.Instance.gEditor.gameObject.SetActive(true);
-    }
-
-    public void openAccelCurveGraph() {
-        Globals.Instance.gEditor.setCurve(axle.acceleration_curve);
-        Globals.Instance.gEditor.gameObject.SetActive(true);
-    }
 }

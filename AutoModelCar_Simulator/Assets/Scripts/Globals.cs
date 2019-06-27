@@ -10,9 +10,6 @@ public class Globals : MonoBehaviour {
 
 	public RosSharp.RosBridgeClient.RosConnector Connection;
 	public DevConsoleController DevConsole;
-	public GraphEditor gEditor;
-	public KeyFrameEditor kfEditor;
-
 	public CarController CurrentCar;
 
 	public CircleRenderer CircleDraw;
