@@ -7,12 +7,14 @@ using std_msgs = RosSharp.RosBridgeClient.Messages.Standard;
 public class PropulsionAxle : MonoBehaviour
 {
     public RosConnector Connection;
-    public AnimationCurve acceleration_curve;
-    public AnimationCurve speed_interp = new AnimationCurve(new Keyframe(0, 0), new Keyframe(150, 0), new Keyframe(600, 3), new Keyframe(2500, 10)); //converting from [0, 150, 600] to [0, 0, 3] (m/s)
+
+    //converting from [0, 150, 600] to [0, 0, 3] (m/s), Use this for value interpoaltion
+    public AnimationCurve speed_interp = new AnimationCurve(new Keyframe(0, 0), new Keyframe(150, 0), new Keyframe(600, 3), new Keyframe(2500, 10)); 
 
     public string topic = "/manual_control/speed";
     public Transform left_wheel, right_wheel;
     
+    // Inter-wheel distance:
     public float T {
         get {return Vector3.Distance(left_wheel.position, right_wheel.position);}
         set {Globals.Instance.DevConsole.error("Setting interwheel distance not implemented!");}
@@ -36,13 +38,13 @@ public class PropulsionAxle : MonoBehaviour
     private float _speed_goal = 0.0f;
     private float last_frame_real_speed = 0.0f;
 
-    private float ang_speed = 0.0f, ang_accel = 0.0f;
-    public float accl_mul = 0.0f;
-    public float speed_damp = 0.9f;
-    public float speed_mul = 0.01f;
+    private float delta_speed = 0.0f, delta_accel = 0.0f;
+    public float delta_accl_mul = 0.4f;
+    public float delta_speed_damp = 0.8f;
+    public float delta_speed_mul = 0.055f;
     public bool instant_response = false;
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         if(!Connection) Connection = Globals.Instance.Connection;
@@ -52,10 +54,10 @@ public class PropulsionAxle : MonoBehaviour
     void FixedUpdate()
     {
         if(instant_response) return;
-        ang_accel = (_speed_goal - _speed_real) * accl_mul;
-        ang_speed += ang_accel;
-        ang_speed *= speed_damp;
-        _speed_real += ang_speed * speed_mul;
+        delta_accel = (_speed_goal - _speed_real) * delta_accl_mul;
+        delta_speed += delta_accel;
+        delta_speed *= delta_speed_damp;
+        _speed_real += delta_speed * delta_speed_mul;
     }
 
     private void speed_callback(std_msgs.Int16 data) {
@@ -64,6 +66,7 @@ public class PropulsionAxle : MonoBehaviour
     }
 
     public void stop() {
+        _speed_goal = 0.0f;
         _speed_real = 0.0f;
     }
 }

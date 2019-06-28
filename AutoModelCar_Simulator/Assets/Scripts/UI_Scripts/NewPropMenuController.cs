@@ -8,18 +8,7 @@ public class NewPropMenuController : MonoBehaviour
     public GameObject max_car_prefab;
     public GameObject cless_car_prefab;
     public UIListController prop_list;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public void spawn_min_car() {
         GameObject o = Instantiate(min_car_prefab, Globals.Instance.spaceHandle.handleObject.position, Quaternion.identity);
         prop_list.Add_Prop(o);

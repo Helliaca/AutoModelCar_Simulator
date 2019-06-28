@@ -11,13 +11,12 @@ public class CP_GPSPanelController : CP_PanelController
     public InputField freq;
     private GPSController gps;
 
-    // Start is called before the first frame update
     void Start()
     {
         gps = reference.GetComponent<GPSController>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if(!pos_x.isFocused) { pos_x.text = reference.localPosition.x.ToString(); }

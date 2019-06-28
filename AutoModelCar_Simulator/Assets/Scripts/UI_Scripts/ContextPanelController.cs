@@ -16,18 +16,6 @@ public class ContextPanelController : MonoBehaviour
 
     private PropComponent reference;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void setComponent(PropComponent comp) {
         foreach(ComponentPanel p in panels) {
             if(p.cType==comp.type) {

@@ -52,10 +52,4 @@ public class PropComponentGroup : MonoBehaviour
     {
         if(Component_Container==null) Component_Container = transform;
     }
-
-    
-    void Update()
-    {
-        
-    }
 }

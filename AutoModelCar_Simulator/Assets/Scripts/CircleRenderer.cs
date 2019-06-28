@@ -21,12 +21,13 @@ public class CircleRenderer : MonoBehaviour
         set { res = value; line.positionCount = value; CreatePoints(); }
     }
 
+    public Transform Center_marker; //Marks center of the circle
+
     private float xr=1, yr=1;
     private int res = 50;
 
     private LineRenderer line;
 
-    // Start is called before the first frame update
     void Awake()
     {
         line = GetComponent<LineRenderer>();
@@ -48,6 +49,15 @@ public class CircleRenderer : MonoBehaviour
             line.SetPosition (i,new Vector3(x,0,z) );
 
             angle += (360f / resolution);
+        }
+    }
+
+    void Update() {
+        if(Globals.Instance.CurrentCar) {
+            Globals.Instance.CurrentCar.UpdateTurningCircleValues(this);
+        }
+        if(Center_marker) {
+            Center_marker.position = this.center;
         }
     }
 }

@@ -14,17 +14,6 @@ public class NewDecoMenuController : MonoBehaviour
     public GameObject king_prefab;
     public GameObject knight_prefab;
     public GameObject pawn_prefab;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void spawn_cbox() {
         GameObject o = Instantiate(cbox_prefab, Globals.Instance.spaceHandle.handleObject.position, Quaternion.identity);

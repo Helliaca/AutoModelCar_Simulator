@@ -10,13 +10,12 @@ public class CP_PropAxlePanelController : CP_PanelController
     public InputField topicname, interwheeldist;
     private PropulsionAxle axle;
 
-    // Start is called before the first frame update
     void Start()
     {
         axle = reference.GetComponent<PropulsionAxle>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if(!pos_x.isFocused) { pos_x.text = reference.localPosition.x.ToString(); }

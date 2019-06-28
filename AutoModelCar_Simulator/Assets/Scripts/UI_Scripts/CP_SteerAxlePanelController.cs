@@ -10,13 +10,11 @@ public class CP_SteerAxlePanelController : CP_PanelController
     public InputField topicname, interwheeldist;
     private SteeringAxle axle;
 
-    // Start is called before the first frame update
     void Start()
     {
         axle = reference.GetComponent<SteeringAxle>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(!pos_x.isFocused) { pos_x.text = reference.localPosition.x.ToString(); }

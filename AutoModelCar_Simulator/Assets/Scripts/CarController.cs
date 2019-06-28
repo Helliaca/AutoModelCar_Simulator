@@ -13,17 +13,15 @@ public class CarController : MonoBehaviour
     public PropulsionAxle backAxle;
     public SteeringAxle frontAxle;
     public LaserScanReader lidar;
-    //public Transform frontWheel_right;
-    //public Transform frontWheel_left;
-    // public LaserScanVisualizerLines lsv_lines;
-    // public LaserScanVisualizerMesh lsv_mesh;
-    // public RosSharp.SensorVisualization.LaserScanVisualizerSpheres lsv_spheres;
 
 
     //Private variables
     private float L;    // Distance between axles
     private float R;    // Radius of current turning circle
     private Vector3 C;  // Center of current turning circle
+    private float Phi=0;    // Rotation of virtual front-center wheel
+    private float lw_rot=0, rw_rot=0; // Rotation of left and right wheel
+    private float amount_of_rotation=0; // Amount (in RAD) the car rotated this frame
 
     void Start()
     {
@@ -31,7 +29,7 @@ public class CarController : MonoBehaviour
 
     void Update()
     {
-        float Phi = frontAxle.steering_real_rad;
+        Phi = frontAxle.steering_real_rad;
         float Tan_Phi = (Mathf.Abs(Mathf.Tan(Phi))>0.000001f) ? Mathf.Tan(Phi) : 0.000001f; //Avoid Tan(Phi)=0, because it causes trouble
 
         L = Vector3.Distance(backAxle.transform.position, frontAxle.transform.position); // L is the distance between the front and back axle
@@ -41,7 +39,6 @@ public class CarController : MonoBehaviour
 
 
 
-        float amount_of_rotation=0, lw_rot=0, rw_rot=0;
         if(Phi>0) {
             C = backAxle.transform.position + transform.right * R;
             amount_of_rotation = (backAxle.speed_real*Time.deltaTime)/R;
@@ -60,19 +57,16 @@ public class CarController : MonoBehaviour
         }
         frontAxle.set_wheel_rotations(lw_rot, rw_rot);
 
-        // GUI and HUD stuff
-        if(Globals.Instance.c_marker.gameObject.activeSelf) {
-            Globals.Instance.c_marker.position = C;
-        }
-        if(Globals.Instance.CircleDraw.gameObject.activeSelf) {
-            Globals.Instance.CircleDraw.center = C;
-            Globals.Instance.CircleDraw.xradius = R;
-            Globals.Instance.CircleDraw.yradius = R;
-        }
-        if(Globals.Instance.Ack_HUD.gameObject.activeSelf) {
-            Globals.Instance.Ack_HUD.setValues(Mathf.Rad2Deg*Phi, lw_rot, rw_rot, L, R, C, Mathf.Rad2Deg*amount_of_rotation*1f/Time.deltaTime);
-        }
-
         transform.RotateAround(C, Vector3.up, Mathf.Rad2Deg*amount_of_rotation);
+    }
+
+    public void UpdateAckermannValues(AckController ack) {
+        ack.setValues(Mathf.Rad2Deg*Phi, lw_rot, rw_rot, L, R, C, Mathf.Rad2Deg*amount_of_rotation*1f/Time.deltaTime);
+    }
+
+    public void UpdateTurningCircleValues(CircleRenderer cir) {
+        cir.center = C;
+        cir.xradius = R;
+        cir.yradius = R;
     }
 }

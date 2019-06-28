@@ -13,13 +13,7 @@ public class CP_LaserPanelController : CP_PanelController
 
     private RosSharp.RosBridgeClient.LaserScanReader ls_reader;
     private RosSharp.RosBridgeClient.LaserScanPublisher ls_pub;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
         if(!pos_x.isFocused) { pos_x.text = reference.localPosition.x.ToString(); }

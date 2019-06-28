@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class ContextMenuController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void LateUpdate()
     {
         if(Input.GetMouseButtonDown(0)) StartCoroutine(hide_after_wait());

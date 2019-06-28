@@ -6,17 +6,6 @@ public class CollisionDetection : MonoBehaviour
 {
     public GameObject collisionmarker;
     public bool stop_car_on_collision = true;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void OnTriggerEnter(Collider other)
     {

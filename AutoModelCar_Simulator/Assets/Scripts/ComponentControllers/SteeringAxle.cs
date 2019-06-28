@@ -9,7 +9,9 @@ public class SteeringAxle : MonoBehaviour
     public string topic = "/steering";
     public RosConnector Connection;
     public Transform left_wheel, right_wheel;
-    public AnimationCurve steering_interp = new AnimationCurve(new Keyframe(0, -25), new Keyframe(180, 25)); //converting coordinates from [0,180] to [-25,25]
+
+    //converting coordinates from [0,180] to [-25,25], use this for value interpolation:
+    public AnimationCurve steering_interp = new AnimationCurve(new Keyframe(0, -25), new Keyframe(180, 25)); 
 
 
     public float T {
@@ -53,14 +55,12 @@ public class SteeringAxle : MonoBehaviour
         right_wheel.localRotation = Quaternion.Euler(0, right_phi, 0);
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         if(!Connection) Connection = Globals.Instance.Connection;
         steering_sub = Connection.RosSocket.Subscribe<std_msgs.UInt8>(topic, steering_callback);
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if(instant_response) return;

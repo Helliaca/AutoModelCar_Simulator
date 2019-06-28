@@ -41,15 +41,12 @@ public class DevConsoleController : MonoBehaviour {
 		mirror(command);
 		string[] cmds = command.Split(' ');
 
-		if(cmds[0] == "hi") {
-			print("whats up");
-		}
-		else if(cmds[0] == "clear") {
+		if(cmds[0] == "clear") {
 			output_s = "";
 			print("Output cleared");
 		}
 		else if(cmds[0] == "fill") {
-			for(int i=0; i<100; i++) print("Fill");
+			for(int i=0; i<100; i++) print("Fill"); //Uset for testing DevConsole ScrollRect
 		}
 		else if(cmds[0] == "toggle" && cmds[1]=="HUD") {
 			GameObject HUDcanvas = GameObject.Find("HUDCanvas");
@@ -68,9 +65,7 @@ public class DevConsoleController : MonoBehaviour {
 			}
 		}
 		else if(cmds[0] == "toggle" && cmds[1]=="Circle") {
-			Globals.Instance.CircleDraw.gameObject.SetActive(!Globals.Instance.CircleDraw.gameObject.activeSelf);
-			Globals.Instance.c_marker.gameObject.SetActive(!Globals.Instance.c_marker.gameObject.activeSelf);
-			print("Circle toggled");
+			execute("toggle CircleRenderer");
 		}
 		else if(cmds[0] == "toggle" && cmds[1]=="lidar_spheres") {
 			Globals.Instance.lsv_spheres.enabled = !Globals.Instance.lsv_spheres.enabled;
@@ -111,8 +106,6 @@ public class DevConsoleController : MonoBehaviour {
 		}
 		else if(cmds[0] == "rst") {
 			execute("HUD off");
-			Globals.Instance.CircleDraw.gameObject.SetActive(false);
-			Globals.Instance.c_marker.gameObject.SetActive(false);
 			Globals.Instance.lsv_spheres.enabled = false;
 			Globals.Instance.lsv_mesh.enabled = false;
 			Globals.Instance.lsv_lines.enabled = false;

@@ -19,7 +19,7 @@ public class WindowResize : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
                 window.sizeDelta = new Vector2(Mathf.Abs(old_pos.x - Input.mousePosition.x), Mathf.Abs(old_pos.y - Input.mousePosition.y));
             }
             else {
-                old_pos = window.anchoredPosition; //Camera.main.WorldToScreenPoint(window.position);
+                old_pos = window.anchoredPosition;
                 float m_u_y = Screen.height - Input.mousePosition.y; //mouse position y Coordinate with the top row being 0 and the bottom row being the maximum
                 window.sizeDelta = new Vector2(Mathf.Abs(old_pos.x - Input.mousePosition.x), Mathf.Abs(-old_pos.y - m_u_y));
             }

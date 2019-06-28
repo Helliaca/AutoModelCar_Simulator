@@ -36,6 +36,9 @@ public class AckController : MonoBehaviour
         speed_t.text = "/speed: " + Globals.Instance.CurrentCar.backAxle.speed_topic.ToString();
         speed_r_t.text = "Speed: " + Globals.Instance.CurrentCar.backAxle.speed_real.ToString("F3") + "m/s";
         pos_t.text = "Position: " + Globals.Instance.CurrentCar.transform.position.ToString();
+    }
 
+    void OnGUI() {
+        Globals.Instance.CurrentCar.UpdateAckermannValues(this);
     }
 }

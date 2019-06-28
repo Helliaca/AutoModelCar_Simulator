@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class NewComponentMenuController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void add_GPS() {
         PropComponentGroup group = Globals.Instance.Selected_Prop.reference.GetComponent<PropComponentGroup>();
         if(group != null) {
