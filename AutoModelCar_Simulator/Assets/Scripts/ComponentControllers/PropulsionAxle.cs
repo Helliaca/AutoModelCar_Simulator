@@ -21,22 +21,26 @@ public class PropulsionAxle : MonoBehaviour
     public float speed_topic {
         set { 
             _speed_topic = value;
-            _speed_real_prev = last_frame_real_speed; 
-            _speed_real = speed_interp.Evaluate(value);
-            Debug.Log(_speed_real);
-            accel_stime = Time.time;
+            _speed_goal = speed_interp.Evaluate(value); 
+            if(instant_response) _speed_real = speed_interp.Evaluate(value); 
          }
         get { return _speed_topic; }
     }
     public float speed_real {
-        get { return _speed_real_prev + (_speed_real-_speed_real_prev)*acceleration_curve.Evaluate(Time.time - accel_stime); }
+        get { return _speed_real; }
     }
 
     private float _speed_real=0, _speed_topic;
     private string speed_sub;
     private float accel_stime = 0.0f;
-    private float _speed_real_prev = 0.0f;
+    private float _speed_goal = 0.0f;
     private float last_frame_real_speed = 0.0f;
+
+    private float ang_speed = 0.0f, ang_accel = 0.0f;
+    public float accl_mul = 0.0f;
+    public float speed_damp = 0.9f;
+    public float speed_mul = 0.01f;
+    public bool instant_response = false;
 
     // Start is called before the first frame update
     void Start()
@@ -45,10 +49,13 @@ public class PropulsionAxle : MonoBehaviour
         speed_sub = Connection.RosSocket.Subscribe<std_msgs.Int16>(topic, speed_callback);
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        last_frame_real_speed = speed_real;
+        if(instant_response) return;
+        ang_accel = (_speed_goal - _speed_real) * accl_mul;
+        ang_speed += ang_accel;
+        ang_speed *= speed_damp;
+        _speed_real += ang_speed * speed_mul;
     }
 
     private void speed_callback(std_msgs.Int16 data) {
@@ -57,7 +64,6 @@ public class PropulsionAxle : MonoBehaviour
     }
 
     public void stop() {
-        _speed_real_prev = 0.0f;
         _speed_real = 0.0f;
     }
 }

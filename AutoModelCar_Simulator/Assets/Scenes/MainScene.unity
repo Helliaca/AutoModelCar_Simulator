@@ -37908,6 +37908,21 @@ PrefabInstance:
       propertyPath: acceleration_curve.m_Curve.Array.data[0].value
       value: 0.000045776367
       objectReference: {fileID: 0}
+    - target: {fileID: 8506724827387688508, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: accl_mul
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8506724827387688508, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: speed_damp
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8506724827387688508, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: speed_mul
+      value: 0.055
+      objectReference: {fileID: 0}
     - target: {fileID: 3299390884968834374, guid: 25b22254b6366084688e7f91d4e92b8a,
         type: 3}
       propertyPath: Connection

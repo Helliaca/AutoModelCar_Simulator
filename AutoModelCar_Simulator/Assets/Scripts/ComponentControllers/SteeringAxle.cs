@@ -9,7 +9,6 @@ public class SteeringAxle : MonoBehaviour
     public string topic = "/steering";
     public RosConnector Connection;
     public Transform left_wheel, right_wheel;
-    public AnimationCurve acceleration_curve;
     public AnimationCurve steering_interp = new AnimationCurve(new Keyframe(0, -25), new Keyframe(180, 25)); //converting coordinates from [0,180] to [-25,25]
 
 
@@ -42,11 +41,9 @@ public class SteeringAxle : MonoBehaviour
     private float _steering_goal = 0.01f;
     private float _steering_real= 0.01f;
     private float ang_speed = 0.0f, ang_accel = 0.0f;
-    public float AvgDegPerSecond = 50.0f; //rough estimate
-
-    public float accl_mul = 0.0f;
-    public float speed_damp = 0.9f;
-    public float speed_mul = 0.01f;
+    public float accl_mul = 0.4f;
+    public float speed_damp = 0.8f;
+    public float speed_mul = 0.055f;
     public bool instant_response = false;
 
 
