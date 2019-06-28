@@ -5,6 +5,7 @@ using RosSharp.RosBridgeClient;
 using std_msgs = RosSharp.RosBridgeClient.Messages.Standard;
 using nav_msgs = RosSharp.RosBridgeClient.Messages.Navigation;
 using geo_msgs = RosSharp.RosBridgeClient.Messages.Geometry;
+using autominy_msgs = RosSharp.RosBridgeClient.Messages.Autominy;
 
 
 public class CarController : MonoBehaviour
