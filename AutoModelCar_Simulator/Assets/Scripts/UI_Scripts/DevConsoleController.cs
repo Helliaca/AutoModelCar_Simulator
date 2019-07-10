@@ -85,11 +85,12 @@ public class DevConsoleController : MonoBehaviour {
 			print(obj.name + " enabled: " + obj.activeSelf);
 		}
 		else if(cmds[0] == "set_speed") {
-			Globals.Instance.CurrentCar.backAxle.speed_topic = float.Parse(cmds[1]);
+			//Globals.Instance.CurrentCar.backAxle.speed_topic = float.Parse(cmds[1]);
+			Globals.Instance.CurrentCar.backAxle.set_speed(float.Parse(cmds[1]));
 			print("Setting speed to " + cmds[1]);
 		}
 		else if(cmds[0] == "set_steering") {
-			Globals.Instance.CurrentCar.frontAxle.steering_topic = float.Parse(cmds[1]);
+			Globals.Instance.CurrentCar.frontAxle.set_steering(float.Parse(cmds[1]));
 			print("Setting steering to " + cmds[1]);
 		}
 		else if(cmds[0] == "load" && cmds[1]== "scene") {

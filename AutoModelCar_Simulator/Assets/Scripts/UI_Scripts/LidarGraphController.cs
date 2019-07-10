@@ -26,10 +26,10 @@ public class LidarGraphController : MonoBehaviour
                     return Globals.Instance.CurrentCar.transform.position.z;
                 }
                 case AxisValue.CAR_SPEED : {
-                    return Globals.Instance.CurrentCar.backAxle.speed_topic;
+                    return Globals.Instance.CurrentCar.backAxle.speed_real;
                 }
                 case AxisValue.CAR_STEERING : {
-                    return Globals.Instance.CurrentCar.frontAxle.steering_topic;
+                    return Globals.Instance.CurrentCar.frontAxle.steering_real_deg;
                 }
                 case AxisValue.SYS_FPS : {
                     return 1.0f / Time.deltaTime;

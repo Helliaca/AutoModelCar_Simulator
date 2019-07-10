@@ -6216,6 +6216,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GPVFX_Knight_phys
       objectReference: {fileID: 0}
+    - target: {fileID: 5207598578926441579, guid: 45a776ea66f0276478fae3e9e5f4f2d9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5207598578926274635, guid: 45a776ea66f0276478fae3e9e5f4f2d9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8822,6 +8827,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: car_lab_box_phys (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979303848079501970, guid: dd6b7aa8e457e5b499985aa9478c8811,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3979303848079013554, guid: dd6b7aa8e457e5b499985aa9478c8811,
         type: 3}
@@ -23110,6 +23120,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: car_pieces_phys
       objectReference: {fileID: 0}
+    - target: {fileID: 8887082755447573884, guid: fa766532668452545a062709a7080133,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8887082755447607644, guid: fa766532668452545a062709a7080133,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -24584,6 +24599,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: car_lab_box_phys
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979303848079501970, guid: dd6b7aa8e457e5b499985aa9478c8811,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3979303848079013554, guid: dd6b7aa8e457e5b499985aa9478c8811,
         type: 3}
@@ -29803,8 +29823,7 @@ MonoBehaviour:
   Connection: {fileID: 1779272840}
   DevConsole: {fileID: 1284915227}
   CurrentCar: {fileID: 119284297}
-  CircleDraw: {fileID: 1290590643}
-  c_marker: {fileID: 1422077242}
+  Selected_Prop: {fileID: 0}
   UI_GRAPH_CAMERA: {fileID: 79695175}
   ComponentList: {fileID: 1870337742}
   PorpList: {fileID: 1373611155070440976}
@@ -29821,7 +29840,6 @@ MonoBehaviour:
     type: 3}
   CollisionDetection_prefab: {fileID: 1187169384242495910, guid: c288577703c911d4a94de920811d34ec,
     type: 3}
-  Selected_Prop: {fileID: 0}
 --- !u!4 &1779272837
 Transform:
   m_ObjectHideFlags: 0
@@ -37668,10 +37686,20 @@ PrefabInstance:
       propertyPath: visualizers.Array.data[2]
       value: 
       objectReference: {fileID: 566598177}
+    - target: {fileID: 6176116824109086304, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: angle_min
+      value: -3.14159
+      objectReference: {fileID: 0}
+    - target: {fileID: 6176116824109086304, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: angle_max
+      value: 3.14159
+      objectReference: {fileID: 0}
     - target: {fileID: 6456349324319097796, guid: 25b22254b6366084688e7f91d4e92b8a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.837
+      value: -1.764
       objectReference: {fileID: 0}
     - target: {fileID: 6456349324319097796, guid: 25b22254b6366084688e7f91d4e92b8a,
         type: 3}
@@ -37681,7 +37709,7 @@ PrefabInstance:
     - target: {fileID: 6456349324319097796, guid: 25b22254b6366084688e7f91d4e92b8a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.629
+      value: 0.76
       objectReference: {fileID: 0}
     - target: {fileID: 6456349324319097796, guid: 25b22254b6366084688e7f91d4e92b8a,
         type: 3}
@@ -37691,7 +37719,7 @@ PrefabInstance:
     - target: {fileID: 6456349324319097796, guid: 25b22254b6366084688e7f91d4e92b8a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.5563771
+      value: 0.5322299
       objectReference: {fileID: 0}
     - target: {fileID: 6456349324319097796, guid: 25b22254b6366084688e7f91d4e92b8a,
         type: 3}
@@ -37701,7 +37729,7 @@ PrefabInstance:
     - target: {fileID: 6456349324319097796, guid: 25b22254b6366084688e7f91d4e92b8a,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.83092993
+      value: 0.8465999
       objectReference: {fileID: 0}
     - target: {fileID: 6456349324319097796, guid: 25b22254b6366084688e7f91d4e92b8a,
         type: 3}
@@ -37716,7 +37744,7 @@ PrefabInstance:
     - target: {fileID: 6456349324319097796, guid: 25b22254b6366084688e7f91d4e92b8a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 67.611
+      value: 64.312004
       objectReference: {fileID: 0}
     - target: {fileID: 6456349324319097796, guid: 25b22254b6366084688e7f91d4e92b8a,
         type: 3}
@@ -37726,6 +37754,11 @@ PrefabInstance:
     - target: {fileID: 3173730300920320637, guid: 25b22254b6366084688e7f91d4e92b8a,
         type: 3}
       propertyPath: acceleration_curve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173730300920320637, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: steering_normalized_interp.m_Curve.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3173730300920320637, guid: 25b22254b6366084688e7f91d4e92b8a,
@@ -37853,6 +37886,71 @@ PrefabInstance:
       propertyPath: speed_mul
       value: 0.055
       objectReference: {fileID: 0}
+    - target: {fileID: 3173730300920320637, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: instant_response
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173730300920320637, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: steering_normalized_interp.m_Curve.Array.data[0].inSlope
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173730300920320637, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: steering_normalized_interp.m_Curve.Array.data[0].outSlope
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173730300920320637, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: steering_normalized_interp.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173730300920320637, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: steering_normalized_interp.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173730300920320637, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: steering_normalized_interp.m_Curve.Array.data[1].value
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173730300920320637, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: steering_normalized_interp.m_Curve.Array.data[1].inSlope
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173730300920320637, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: steering_normalized_interp.m_Curve.Array.data[1].outSlope
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173730300920320637, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: steering_normalized_interp.m_Curve.Array.data[1].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173730300920320637, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: steering_normalized_interp.m_Curve.Array.data[0].time
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173730300920320637, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: steering_normalized_interp.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173730300920320637, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: steering_normalized_interp.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173730300920320637, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: steering_normalized_interp.m_Curve.Array.data[0].value
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 8506724827387688508, guid: 25b22254b6366084688e7f91d4e92b8a,
         type: 3}
       propertyPath: acceleration_curve.m_Curve.Array.size
@@ -37957,6 +38055,36 @@ PrefabInstance:
         type: 3}
       propertyPath: stop_car_on_collision
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7816883927957061336, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7816883927957061336, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7816883927957061336, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454161039139548129, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454161039139548129, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454161039139548129, guid: 25b22254b6366084688e7f91d4e92b8a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25b22254b6366084688e7f91d4e92b8a, type: 3}

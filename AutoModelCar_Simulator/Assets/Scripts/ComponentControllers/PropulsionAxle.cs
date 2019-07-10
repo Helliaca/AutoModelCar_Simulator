@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RosSharp.RosBridgeClient;
-using std_msgs = RosSharp.RosBridgeClient.Messages.Standard;
+using autominy_msgs = RosSharp.RosBridgeClient.Messages.Autominy;
 
 public class PropulsionAxle : MonoBehaviour
 {
     public RosConnector Connection;
 
-    //converting from [0, 150, 600] to [0, 0, 3] (m/s), Use this for value interpoaltion
-    public AnimationCurve speed_interp = new AnimationCurve(new Keyframe(0, 0), new Keyframe(150, 0), new Keyframe(600, 3), new Keyframe(2500, 10)); 
+    public AnimationCurve speed_pwm_interp = new AnimationCurve(new Keyframe(-1000, -5), new Keyframe(0, 0), new Keyframe(1000, 5)); 
+    public AnimationCurve speed_real_interp = new AnimationCurve(new Keyframe(-5, -5), new Keyframe(0, 0), new Keyframe(5, 5)); 
+    public AnimationCurve speed_normalized_interp = new AnimationCurve(new Keyframe(-1, -5), new Keyframe(0, 0), new Keyframe(1, 5)); 
 
-    public string topic = "/manual_control/speed";
+    public string speed_pwm_topic = "/manual_control/speed_pwm";
+    public string speed_real_topic = "/manual_control/speed_real";
+    public string speed_normalized_topic = "/manual_control/speed_nrm";
     public Transform left_wheel, right_wheel;
     
     // Inter-wheel distance:
@@ -20,20 +23,21 @@ public class PropulsionAxle : MonoBehaviour
         set {Globals.Instance.DevConsole.error("Setting interwheel distance not implemented!");}
     }
 
-    public float speed_topic {
-        set { 
-            _speed_topic = value;
-            _speed_goal = speed_interp.Evaluate(value); 
-            if(instant_response) _speed_real = speed_interp.Evaluate(value); 
-         }
-        get { return _speed_topic; }
-    }
+    // public float speed_pwm_topic {
+    //     set { 
+    //         _speed_topic = value;
+    //         _speed_goal = speed_pwm_interp.Evaluate(value); 
+    //         if(instant_response) _speed_real = speed_pwm_interp.Evaluate(value); 
+    //      }
+    //     get { return _speed_topic; }
+    // }
     public float speed_real {
         get { return _speed_real; }
     }
 
+    private string speed_pwm_sub, speed_real_sub, speed_normalized_sub;
+
     private float _speed_real=0, _speed_topic;
-    private string speed_sub;
     private float accel_stime = 0.0f;
     private float _speed_goal = 0.0f;
     private float last_frame_real_speed = 0.0f;
@@ -48,7 +52,9 @@ public class PropulsionAxle : MonoBehaviour
     void Start()
     {
         if(!Connection) Connection = Globals.Instance.Connection;
-        speed_sub = Connection.RosSocket.Subscribe<std_msgs.Int16>(topic, speed_callback);
+        speed_pwm_sub = Connection.RosSocket.Subscribe<autominy_msgs.Autominy_SpeedPWMCommand>(speed_pwm_topic, speed_pwm_callback);
+        speed_real_sub = Connection.RosSocket.Subscribe<autominy_msgs.Autominy_SpeedCommand>(speed_real_topic, speed_real_callback);
+        speed_normalized_sub = Connection.RosSocket.Subscribe<autominy_msgs.Autominy_NormalizedSpeedCommand>(speed_normalized_topic, speed_normalized_callback);
     }
 
     void FixedUpdate()
@@ -60,9 +66,24 @@ public class PropulsionAxle : MonoBehaviour
         _speed_real += delta_speed * delta_speed_mul;
     }
 
-    private void speed_callback(std_msgs.Int16 data) {
-        //Globals.Instance.DevConsole.print("New speed: " + data.data);
-        speed_topic = (float)data.data;
+    private void speed_pwm_callback(autominy_msgs.Autominy_SpeedPWMCommand data) {
+        _speed_goal = speed_pwm_interp.Evaluate((float)data.value);
+        if(instant_response) _speed_real = _speed_goal; 
+    }
+
+    private void speed_real_callback(autominy_msgs.Autominy_SpeedCommand data) {
+        _speed_goal = speed_real_interp.Evaluate((float)data.value);
+        if(instant_response) _speed_real = _speed_goal; 
+    }
+
+    private void speed_normalized_callback(autominy_msgs.Autominy_NormalizedSpeedCommand data) {
+        _speed_goal = speed_normalized_interp.Evaluate((float)data.value);
+        if(instant_response) _speed_real = _speed_goal; 
+    }
+
+    public void set_speed(float mps) {
+        _speed_goal = mps;
+        if(instant_response) _speed_real = _speed_goal;
     }
 
     public void stop() {
