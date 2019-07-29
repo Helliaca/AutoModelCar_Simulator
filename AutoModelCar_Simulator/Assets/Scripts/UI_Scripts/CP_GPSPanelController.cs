@@ -27,7 +27,7 @@ public class CP_GPSPanelController : CP_PanelController
         if(!origin_y.isFocused) { origin_y.text = gps.origin.y.ToString(); }
         if(!origin_z.isFocused) { origin_z.text = gps.origin.z.ToString(); }
 
-        if(!topicname.isFocused) { topicname.text = gps.topic; }
+        if(!topicname.isFocused) { topicname.text = gps.Topic; }
         if(!freq.isFocused) { freq.text = gps.odom_frequency.ToString(); }
     }
 
@@ -41,7 +41,7 @@ public class CP_GPSPanelController : CP_PanelController
             if(origin_y.text!="") gps.origin.y = float.Parse(origin_y.text);
             if(origin_z.text!="") gps.origin.z = float.Parse(origin_z.text);
 
-            if(topicname.text!="") gps.topic = topicname.text;
+            if(topicname.text!="") gps.changeTopicName(topicname.text);
 
             if(freq.text!="") gps.odom_frequency = float.Parse(freq.text);
         }

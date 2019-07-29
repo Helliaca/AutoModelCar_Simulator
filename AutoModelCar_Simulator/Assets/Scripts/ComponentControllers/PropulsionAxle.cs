@@ -15,6 +15,9 @@ public class PropulsionAxle : MonoBehaviour
     public string speed_pwm_topic = "/manual_control/speed_pwm";
     public string speed_real_topic = "/manual_control/speed_real";
     public string speed_normalized_topic = "/manual_control/speed_nrm";
+    public string ticks_topic = "/sensors/arduino/ticks";
+    public float meters_per_tick = 0.0026f;
+    public float ticks_frequency = 35f;
     public Transform left_wheel, right_wheel;
     
     // Inter-wheel distance:
@@ -47,6 +50,11 @@ public class PropulsionAxle : MonoBehaviour
     public float delta_speed_damp = 0.8f;
     public float delta_speed_mul = 0.055f;
     public bool instant_response = false;
+    private float dist_travelled_total = 0.0f;
+    private float dist_travelled_mod = 0.0f;
+    private float stime;
+
+    private TicksPublisher ticks_publisher;
 
     
     void Start()
@@ -55,6 +63,9 @@ public class PropulsionAxle : MonoBehaviour
         speed_pwm_sub = Connection.RosSocket.Subscribe<autominy_msgs.Autominy_SpeedPWMCommand>(speed_pwm_topic, speed_pwm_callback);
         speed_real_sub = Connection.RosSocket.Subscribe<autominy_msgs.Autominy_SpeedCommand>(speed_real_topic, speed_real_callback);
         speed_normalized_sub = Connection.RosSocket.Subscribe<autominy_msgs.Autominy_NormalizedSpeedCommand>(speed_normalized_topic, speed_normalized_callback);
+        ticks_publisher = gameObject.AddComponent(typeof(TicksPublisher)) as TicksPublisher;
+        ticks_publisher.Topic = ticks_topic;
+        stime = Time.time;
     }
 
     void FixedUpdate()
@@ -64,6 +75,14 @@ public class PropulsionAxle : MonoBehaviour
         delta_speed += delta_accel;
         delta_speed *= delta_speed_damp;
         _speed_real += delta_speed * delta_speed_mul;
+    }
+
+    void Update() {
+        if(Time.time > stime + 1.0f/ticks_frequency) {
+            ticks_publisher.publish_ticks(Mathf.FloorToInt(dist_travelled_mod/meters_per_tick));
+            dist_travelled_mod = dist_travelled_mod % meters_per_tick;
+            stime = Time.time;
+        }
     }
 
     private void speed_pwm_callback(autominy_msgs.Autominy_SpeedPWMCommand data) {
@@ -89,5 +108,10 @@ public class PropulsionAxle : MonoBehaviour
     public void stop() {
         _speed_goal = 0.0f;
         _speed_real = 0.0f;
+    }
+
+    public void add_distance_travelled(float delta) {
+        dist_travelled_total += delta;
+        dist_travelled_mod += delta;
     }
 }

@@ -6,20 +6,13 @@ using std_msgs = RosSharp.RosBridgeClient.Messages.Standard;
 using nav_msgs = RosSharp.RosBridgeClient.Messages.Navigation;
 using geo_msgs = RosSharp.RosBridgeClient.Messages.Geometry;
 
-public class GPSController : MonoBehaviour
+public class GPSController : Publisher<nav_msgs.Odometry>
 {
-    public RosConnector Connection;
     public float odom_frequency = 30;
-    public string topic = "/localization/odom/5";
     public Vector3 origin;
     private string odom_pub;
-    private float stime;
+    private float stime = 0.0f;
 
-    void Start() {
-        if(!Connection) Connection = Globals.Instance.Connection;
-        odom_pub = Connection.RosSocket.Advertise<nav_msgs.Odometry>(topic);
-        stime = Time.time;
-    }
     void FixedUpdate() {
         if(Time.time < stime + 1.0f/odom_frequency) return;
 
@@ -37,7 +30,7 @@ public class GPSController : MonoBehaviour
         co.pose.pose.orientation.z = rot.z;
         co.pose.pose.orientation.w = rot.w;
 
-        Connection.RosSocket.Publish(odom_pub, co);        
+        Publish(co);
         stime = Time.time;
     }
 }

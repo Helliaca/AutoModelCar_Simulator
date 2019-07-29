@@ -58,6 +58,8 @@ public class CarController : MonoBehaviour
         }
         frontAxle.set_wheel_rotations(lw_rot, rw_rot);
 
+        backAxle.add_distance_travelled(amount_of_rotation * R);
+
         transform.RotateAround(C, Vector3.up, Mathf.Rad2Deg*amount_of_rotation);
     }
 
