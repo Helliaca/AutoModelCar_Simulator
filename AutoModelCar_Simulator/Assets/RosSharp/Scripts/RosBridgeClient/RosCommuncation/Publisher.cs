@@ -22,12 +22,6 @@ namespace RosSharp.RosBridgeClient
     {
         public RosConnector Connection;
         public string Topic;
-        // public string Topic {
-        //     get { return _topic; }
-        //     //set { _topic = value; publicationId = Connection.RosSocket.Advertise<T>(_topic); }
-        //     set { _topic = value; publicationId = Connection.RosSocket.Advertise<T>(_topic); }
-        // }
-        //private string _topic;
         private string publicationId;
 
         protected virtual void Start()
@@ -41,6 +35,13 @@ namespace RosSharp.RosBridgeClient
         {
             //GetComponent<RosConnector>().RosSocket.Publish(publicationId, message);
             Connection.RosSocket.Publish(publicationId, message);
+        }
+
+        public void changeTopicName(string newname) {
+            if(newname==Topic) return;
+            Connection.RosSocket.Unadvertise(publicationId);
+            Topic = newname;
+            publicationId = Connection.RosSocket.Advertise<T>(Topic);
         }
     }
 }

@@ -57,7 +57,7 @@ public class CP_LaserPanelController : CP_PanelController
             }
             if(range_min.text!="") ls_reader.range_min = float.Parse(range_min.text);
             if(range_max.text!="") ls_reader.range_max = float.Parse(range_max.text);
-            if(topicname.text!="") ls_pub.Topic = topicname.text;
+            if(topicname.text!="") ls_pub.changeTopicName(topicname.text);
             if(update_rate.text!="") ls_reader.update_rate = (int)float.Parse(update_rate.text);
         }
         catch(System.Exception e) {Globals.Instance.DevConsole.error("Exception occurred while reading TransformPanel Components: " + e.ToString());}

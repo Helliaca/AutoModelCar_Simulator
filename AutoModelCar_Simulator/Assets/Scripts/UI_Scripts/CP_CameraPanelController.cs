@@ -65,7 +65,7 @@ public class CP_CameraPanelController : CP_PanelController
 
             if(focallength.text!="") cam.focalLength = float.Parse(focallength.text);
 
-            if(topicname.text!="") cam_topic.Topic = topicname.text;
+            if(topicname.text!="") cam_topic.changeTopicName(topicname.text);
             if(pubfreq.text!="") cam_topic.frequency = float.Parse(pubfreq.text);
             if(resolution_x.text!="") cam_topic.resolutionWidth = int.Parse(resolution_x.text);
             if(resolution_y.text!="") cam_topic.resolutionHeight = int.Parse(resolution_y.text);
