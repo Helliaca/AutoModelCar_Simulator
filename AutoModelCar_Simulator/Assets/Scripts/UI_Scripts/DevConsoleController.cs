@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class DevConsoleController : MonoBehaviour {
 	public InputField input;
 	public Text output;
-	private string output_s;
+	private string output_s="Console Initialized";
 	public GameObject consoleContainer;
 	public ScrollRect output_scrollrect;
 
@@ -19,7 +19,6 @@ public class DevConsoleController : MonoBehaviour {
 
 	void Start () {
 		Globals.Instance.DevConsole = this;
-		output_s = output.text;
 		consoleContainer.SetActive(false);
 	}
 
@@ -144,10 +143,12 @@ public class DevConsoleController : MonoBehaviour {
 	}
 
 	public void error(string s) {
+		Debug.Log("CONSOLE:" + s);
 		output_s += "\n! <color=red><b>ERR:</b> " + s + "</color>";
 	}
 
 	public void warn(string s) {
+		Debug.Log("CONSOLE:" + s);
 		output_s += "\n! <color=yellow><b>WRN:</b> " + s + "</color>";
 	}
 

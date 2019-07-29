@@ -29519,6 +29519,7 @@ MonoBehaviour:
     type: 3}
   CollisionDetection_prefab: {fileID: 1187169384242495910, guid: c288577703c911d4a94de920811d34ec,
     type: 3}
+  settings_file: {fileID: 4900000, guid: 094e71e7d7803924cb03a120b6a453a8, type: 3}
 --- !u!4 &1779272837
 Transform:
   m_ObjectHideFlags: 0

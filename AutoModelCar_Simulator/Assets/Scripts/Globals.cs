@@ -48,23 +48,7 @@ public class Globals : MonoBehaviour {
 	public TextAsset settings_file;
 
 	//{ID}, {NAME} and {TYPE} are permitted
-	public Dictionary<string, string> settings = new Dictionary<string, string>(){
-		// {"Default_TopicNames_Camera", "/carsim/{NAME}/camera/compressend"},
-		// {"Default_TopicNames_Gps", "/localization/odom/5"},
-		// {"Default_TopicNames_LaserScanner", "/scan"},
-		// {"Default_TopicNames_Ticks", "/arduino/sensors/ticks"},
-
-		// {"Default_TopicNames_SteeringPwm", "/manual_control/steering_pwm"},
-		// {"Default_TopicNames_SteeringReal", "/manual_control/steering_real"},
-		// {"Default_TopicNames_SteeringNormalized", "/manual_control/steering_nrm"},
-
-		// {"Default_TopicNames_SpeedPwm", "/manual_control/speed_pwm"},
-		// {"Default_TopicNames_SpeedReal", "/manual_control/speed_real"},
-		// {"Default_TopicNames_SpeedNormalized", "/manual_control/speed_nrm"},
-		
-		// {"Default_PropNames", "Prop_{ID}"},
-		// {"Default_CarNames", "Vehicle_{ID}"},
-	};
+	public Dictionary<string, string> settings = new Dictionary<string, string>(){};
 
 	void Awake()
 	{
@@ -76,7 +60,16 @@ public class Globals : MonoBehaviour {
 	}
 
 	private static void read_settings() {
-		string[] linesInFile = Instance.settings_file.text.Split('\n');
+		string text;
+		try {
+			text = System.IO.File.ReadAllText("UserSettings\\settings.txt");
+		}
+		catch(System.IO.FileNotFoundException e) {
+			Instance.DevConsole.error(e.FileName + " could not be found! Initializing keys from memory.");
+			text = Instance.settings_file.text;
+		}
+
+		string[] linesInFile = text.Split('\n');
 	
 		foreach (string line in linesInFile)
 		{
