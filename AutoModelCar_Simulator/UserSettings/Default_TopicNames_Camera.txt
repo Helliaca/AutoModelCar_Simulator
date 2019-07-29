@@ -1,0 +1,1 @@
+/carsim/{CARNAME}/camera/compressend

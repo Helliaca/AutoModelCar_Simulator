@@ -28,8 +28,16 @@ namespace RosSharp.RosBridgeClient
                 
         protected override void Start()
         {
+            naming();
             base.Start();
             InitializeMessage();
+        }
+
+        private void naming() {
+            PropComponentGroup master = GetComponentInParent(typeof(PropComponentGroup)) as PropComponentGroup; 
+            if(master==null) {Globals.Instance.DevConsole.error("Component without master group encountered!"); return;}
+            this.gameObject.name = master.gameObject.name + "_laserscanner";
+            Topic = Globals.Instance.normalize_from_settings("Default_TopicNames_LaserScanner", master.id.ToString(), master.gameObject.name, "laserscanner");
         }
 
         private void FixedUpdate()

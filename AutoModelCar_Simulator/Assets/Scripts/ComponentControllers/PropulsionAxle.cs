@@ -56,9 +56,19 @@ public class PropulsionAxle : MonoBehaviour
 
     private TicksPublisher ticks_publisher;
 
-    
+
+    private void naming() {
+        PropComponentGroup master = GetComponentInParent(typeof(PropComponentGroup)) as PropComponentGroup; 
+        if(master==null) {Globals.Instance.DevConsole.error("Component without master group encountered!"); return;}
+        this.gameObject.name = master.gameObject.name + "_propaxle";
+        speed_pwm_topic = Globals.Instance.normalize_from_settings("Default_TopicNames_SpeedPwm", master.id.ToString(), master.gameObject.name, "propaxle");
+        speed_real_topic = Globals.Instance.normalize_from_settings("Default_TopicNames_SpeedReal", master.id.ToString(), master.gameObject.name, "propaxle");
+        speed_normalized_topic = Globals.Instance.normalize_from_settings("Default_TopicNames_SpeedNormalized", master.id.ToString(), master.gameObject.name, "propaxle");
+    }
+
     void Start()
     {
+        naming();
         if(!Connection) Connection = Globals.Instance.Connection;
         speed_pwm_sub = Connection.RosSocket.Subscribe<autominy_msgs.Autominy_SpeedPWMCommand>(speed_pwm_topic, speed_pwm_callback);
         speed_real_sub = Connection.RosSocket.Subscribe<autominy_msgs.Autominy_SpeedCommand>(speed_real_topic, speed_real_callback);

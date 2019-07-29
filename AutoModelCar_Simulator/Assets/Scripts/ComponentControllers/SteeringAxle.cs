@@ -59,8 +59,18 @@ public class SteeringAxle : MonoBehaviour
         right_wheel.localRotation = Quaternion.Euler(0, right_phi, 0);
     }
 
+    private void naming() {
+        PropComponentGroup master = GetComponentInParent(typeof(PropComponentGroup)) as PropComponentGroup; 
+        if(master==null) {Globals.Instance.DevConsole.error("Component without master group encountered!"); return;}
+        this.gameObject.name = master.gameObject.name + "_steeringaxle";
+        steering_pwm_topic = Globals.Instance.normalize_from_settings("Default_TopicNames_SteeringPwm", master.id.ToString(), master.gameObject.name, "steeringaxle");
+        steering_real_topic = Globals.Instance.normalize_from_settings("Default_TopicNames_SteeringReal", master.id.ToString(), master.gameObject.name, "steeringaxle");
+        steering_normalized_topic = Globals.Instance.normalize_from_settings("Default_TopicNames_SteeringNormalized", master.id.ToString(), master.gameObject.name, "steeringaxle");
+    }
+
     void Start()
     {
+        naming();
         if(!Connection) Connection = Globals.Instance.Connection;
         steering_pwm_sub = Connection.RosSocket.Subscribe<autominy_msgs.Autominy_SteeringPWMCommand>(steering_pwm_topic, steering_pwm_callback);
         steering_real_sub = Connection.RosSocket.Subscribe<autominy_msgs.Autominy_SteeringCommand>(steering_real_topic, steering_real_callback);

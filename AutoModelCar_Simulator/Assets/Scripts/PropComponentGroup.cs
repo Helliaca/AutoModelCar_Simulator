@@ -16,6 +16,9 @@ public class PropComponent {
 
 public class PropComponentGroup : MonoBehaviour
 {
+    public static int id_counter = 0;
+    public int id;
+    private bool initialized = false;
     public Transform Component_Container;
 
     public void add_GPS() {
@@ -51,5 +54,18 @@ public class PropComponentGroup : MonoBehaviour
     void Start()
     {
         if(Component_Container==null) Component_Container = transform;
+        if(!initialized) init();
+    }
+
+    public void init() {
+        if(gameObject.isStatic) {initialized = true; return;}
+        this.id = id_counter++;
+        if(GetComponent<CarController>()!=null) {
+            gameObject.name = Globals.Instance.normalize_from_settings("Default_CarNames", id.ToString(), "unnamed", "car");
+        }
+        else {
+            gameObject.name = Globals.Instance.normalize_from_settings("Default_PropNames", id.ToString(), "unnamed", "prop");
+        }
+        initialized = true;
     }
 }

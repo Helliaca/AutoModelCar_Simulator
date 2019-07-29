@@ -13,6 +13,20 @@ public class GPSController : Publisher<nav_msgs.Odometry>
     private string odom_pub;
     private float stime = 0.0f;
 
+
+    protected override void Start()
+    {
+        naming();
+        base.Start();
+    }
+
+    private void naming() {
+        PropComponentGroup master = GetComponentInParent(typeof(PropComponentGroup)) as PropComponentGroup; 
+        if(master==null) {Globals.Instance.DevConsole.error("Component without master group encountered!"); return;}
+        this.gameObject.name = master.gameObject.name + "_gps";
+        Topic = Globals.Instance.normalize_from_settings("Default_TopicNames_Gps", master.id.ToString(), master.gameObject.name, "gps");
+    }
+
     void FixedUpdate() {
         if(Time.time < stime + 1.0f/odom_frequency) return;
 

@@ -45,6 +45,25 @@ public class Globals : MonoBehaviour {
 	// Prefab of CollisionDetection Component
 	public GameObject CollisionDetection_prefab;
 
+	//{ID}, {NAME} and {TYPE} are permitted
+	public Dictionary<string, string> settings = new Dictionary<string, string>(){
+		{"Default_TopicNames_Camera", "/carsim/{NAME}/camera/compressend"},
+		{"Default_TopicNames_Gps", "/localization/odom/5"},
+		{"Default_TopicNames_LaserScanner", "/scan"},
+		{"Default_TopicNames_Ticks", "/arduino/sensors/ticks"},
+
+		{"Default_TopicNames_SteeringPwm", "/manual_control/steering_pwm"},
+		{"Default_TopicNames_SteeringReal", "/manual_control/steering_real"},
+		{"Default_TopicNames_SteeringNormalized", "/manual_control/steering_nrm"},
+
+		{"Default_TopicNames_SpeedPwm", "/manual_control/speed_pwm"},
+		{"Default_TopicNames_SpeedReal", "/manual_control/speed_real"},
+		{"Default_TopicNames_SpeedNormalized", "/manual_control/speed_nrm"},
+		
+		{"Default_PropNames", "Prop_{ID}"},
+		{"Default_CarNames", "Vehicle_{ID}"},
+	};
+
 	void Awake()
 	{
 		if(Instance != null) GameObject.Destroy(Instance);
@@ -75,6 +94,21 @@ public class Globals : MonoBehaviour {
 		}
 	
 		return null;
+	}
+
+	public string normalize_string(string input, string id, string name, string type) {
+		input = input.Replace("{ID}", id);
+		input = input.Replace("{NAME}", name);
+		input = input.Replace("{TYPE}", type);
+		return input;
+	}
+
+	public string normalize_from_settings(string setting_id, string id, string name, string type) {
+		string input = settings[setting_id];
+		input = input.Replace("{ID}", id);
+		input = input.Replace("{NAME}", name);
+		input = input.Replace("{TYPE}", type);
+		return input;
 	}
 
 }
