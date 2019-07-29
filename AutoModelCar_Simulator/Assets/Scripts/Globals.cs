@@ -45,23 +45,25 @@ public class Globals : MonoBehaviour {
 	// Prefab of CollisionDetection Component
 	public GameObject CollisionDetection_prefab;
 
+	public TextAsset settings_file;
+
 	//{ID}, {NAME} and {TYPE} are permitted
 	public Dictionary<string, string> settings = new Dictionary<string, string>(){
-		{"Default_TopicNames_Camera", "/carsim/{NAME}/camera/compressend"},
-		{"Default_TopicNames_Gps", "/localization/odom/5"},
-		{"Default_TopicNames_LaserScanner", "/scan"},
-		{"Default_TopicNames_Ticks", "/arduino/sensors/ticks"},
+		// {"Default_TopicNames_Camera", "/carsim/{NAME}/camera/compressend"},
+		// {"Default_TopicNames_Gps", "/localization/odom/5"},
+		// {"Default_TopicNames_LaserScanner", "/scan"},
+		// {"Default_TopicNames_Ticks", "/arduino/sensors/ticks"},
 
-		{"Default_TopicNames_SteeringPwm", "/manual_control/steering_pwm"},
-		{"Default_TopicNames_SteeringReal", "/manual_control/steering_real"},
-		{"Default_TopicNames_SteeringNormalized", "/manual_control/steering_nrm"},
+		// {"Default_TopicNames_SteeringPwm", "/manual_control/steering_pwm"},
+		// {"Default_TopicNames_SteeringReal", "/manual_control/steering_real"},
+		// {"Default_TopicNames_SteeringNormalized", "/manual_control/steering_nrm"},
 
-		{"Default_TopicNames_SpeedPwm", "/manual_control/speed_pwm"},
-		{"Default_TopicNames_SpeedReal", "/manual_control/speed_real"},
-		{"Default_TopicNames_SpeedNormalized", "/manual_control/speed_nrm"},
+		// {"Default_TopicNames_SpeedPwm", "/manual_control/speed_pwm"},
+		// {"Default_TopicNames_SpeedReal", "/manual_control/speed_real"},
+		// {"Default_TopicNames_SpeedNormalized", "/manual_control/speed_nrm"},
 		
-		{"Default_PropNames", "Prop_{ID}"},
-		{"Default_CarNames", "Vehicle_{ID}"},
+		// {"Default_PropNames", "Prop_{ID}"},
+		// {"Default_CarNames", "Vehicle_{ID}"},
 	};
 
 	void Awake()
@@ -70,6 +72,18 @@ public class Globals : MonoBehaviour {
 		else Instance = this;
 
 		DontDestroyOnLoad(this);
+		read_settings();
+	}
+
+	private static void read_settings() {
+		string[] linesInFile = Instance.settings_file.text.Split('\n');
+	
+		foreach (string line in linesInFile)
+		{
+			if(line[0]=='#' || !line.Contains("=")) continue;
+			string[] entry = line.Split('=');
+			Instance.settings.Add(entry[0].Trim(), entry[1].Trim());
+		}
 	}
 		
 	void Start () {
