@@ -1,15 +1,15 @@
 Default_TopicNames_Camera = /carsim/{NAME}/camera/compressend
-Default_TopicNames_Gps = /{NAME}/localization/odom/5
-Default_TopicNames_LaserScanner = /{NAME}/scan
-Default_TopicNames_Ticks = /{NAME}/arduino/sensors/ticks
+Default_TopicNames_Gps = /localization/odom/5
+Default_TopicNames_LaserScanner = /scan
+Default_TopicNames_Ticks = /arduino/sensors/ticks
 
-Default_TopicNames_SteeringPwm = /{NAME}/manual_control/steering_pwm
-Default_TopicNames_SteeringReal = /{NAME}/manual_control/steering_real
-Default_TopicNames_SteeringNormalized = /{NAME}/manual_control/steering_nrm
+Default_TopicNames_SteeringPwm = /manual_control/steering_pwm
+Default_TopicNames_SteeringReal = /manual_control/steering_real
+Default_TopicNames_SteeringNormalized = /manual_control/steering_nrm
 
-Default_TopicNames_SpeedPwm = /{NAME}/manual_control/speed_pwm
-Default_TopicNames_SpeedReal = /{NAME}/manual_control/speed_real
-Default_TopicNames_SpeedNormalized = /{NAME}/manual_control/speed_nrm
+Default_TopicNames_SpeedPwm = /manual_control/speed_pwm
+Default_TopicNames_SpeedReal = /manual_control/speed_real
+Default_TopicNames_SpeedNormalized = /manual_control/speed_nrm
 
 Default_PropNames = Prop_{ID}
 Default_CarNames = Vehicle_{ID}

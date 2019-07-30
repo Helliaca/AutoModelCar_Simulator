@@ -109,4 +109,9 @@ public class SteeringAxle : MonoBehaviour
         _steering_goal = v;
         if(instant_response) _steering_real = _steering_goal;
     }
+
+    public void set_steering_override(float v) {
+        _steering_goal = v;
+        _steering_real = _steering_goal;
+    }
 }

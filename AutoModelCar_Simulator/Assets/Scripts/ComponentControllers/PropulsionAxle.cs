@@ -115,6 +115,11 @@ public class PropulsionAxle : MonoBehaviour
         if(instant_response) _speed_real = _speed_goal;
     }
 
+    public void set_speed_override(float mps) {
+        _speed_goal = mps;
+        _speed_real = _speed_goal;
+    }
+
     public void stop() {
         _speed_goal = 0.0f;
         _speed_real = 0.0f;
