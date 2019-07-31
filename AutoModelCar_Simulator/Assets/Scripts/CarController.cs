@@ -26,6 +26,7 @@ public class CarController : MonoBehaviour
 
     void Start()
     {
+        if(Globals.Instance.CurrentCar==null) Globals.Instance.CurrentCar = this;
     }
 
     void Update()

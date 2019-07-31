@@ -34,6 +34,12 @@ namespace RosSharp.RosBridgeClient
 
         public void Awake()
         {
+            if(Globals.Instance.has_setting("RosBridgeServer_Url")) RosBridgeServerUrl = Globals.Instance.get_setting("RosBridgeServer_Url");
+            if(Globals.Instance.has_setting("RosBridgeServer_Timeout")) Timeout = int.Parse(Globals.Instance.get_setting("RosBridgeServer_Timeout"));
+            if(Globals.Instance.has_setting("RosBridgeServer_Protocol")) {
+                if(Globals.Instance.get_setting("RosBridgeServer_Timeout")=="Web_Socket_Sharp") Protocol = Protocols.WebSocketSharp;
+                if(Globals.Instance.get_setting("RosBridgeServer_Timeout")=="Web_Socket_NET") Protocol = Protocols.WebSocketNET;
+            }
             new Thread(ConnectAndWait).Start();
         }
 
@@ -42,7 +48,7 @@ namespace RosSharp.RosBridgeClient
             RosSocket = ConnectToRos(Protocol, RosBridgeServerUrl, OnConnected, OnClosed);
 
             if (!isConnected.WaitOne(Timeout * 1000))
-                Debug.LogWarning("Failed to connect to RosBridge at: " + RosBridgeServerUrl);
+                Globals.Instance.DevConsole.warn("Failed to connect to RosBridge at: " + RosBridgeServerUrl);
         }
         
         public static RosSocket ConnectToRos(Protocols protocolType, string serverUrl, EventHandler onConnected = null, EventHandler onClosed = null)
@@ -75,13 +81,13 @@ namespace RosSharp.RosBridgeClient
         private void OnConnected(object sender, EventArgs e)
         {
             isConnected.Set();
-            Debug.Log("Connected to RosBridge: " + RosBridgeServerUrl);
+            Globals.Instance.DevConsole.print("Connected to RosBridge: " + RosBridgeServerUrl);
         }
 
         private void OnClosed(object sender, EventArgs e)
         {
             isConnected.Reset();
-            Debug.Log("Disconnected from RosBridge: " + RosBridgeServerUrl);
+            Globals.Instance.DevConsole.print("Disconnected from RosBridge: " + RosBridgeServerUrl);
         }
     }
 }

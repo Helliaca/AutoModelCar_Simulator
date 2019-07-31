@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using System.Globalization;
 
 /*
  * The attributes and methods included in this class are globally accessible by any other script via the 'Globals.Instance' variable.
@@ -25,6 +26,8 @@ public class Globals : MonoBehaviour {
 	public UIListController ComponentList;
 	// Reference to the current list of props
 	public UIListController PorpList;
+	// Reference to UI Panel responsible for spawning in new props
+	public NewPropMenuController PropSpawner;
 	// Reference to the UI ContextPanel / Inspector window
 	public ContextPanelController ContextPanel;
 	// Reference to the 3D-axis object
@@ -48,7 +51,7 @@ public class Globals : MonoBehaviour {
 	public TextAsset settings_file;
 
 	//{ID}, {NAME} and {TYPE} are permitted
-	public Dictionary<string, string> settings = new Dictionary<string, string>(){};
+	private Dictionary<string, string> settings = new Dictionary<string, string>(){};
 
 	void Awake()
 	{
@@ -73,13 +76,35 @@ public class Globals : MonoBehaviour {
 	
 		foreach (string line in linesInFile)
 		{
-			if(line[0]=='#' || !line.Contains("=")) continue;
+			if(line.Length<1 || line[0]=='#' || !line.Contains("=")) continue;
 			string[] entry = line.Split('=');
 			Instance.settings.Add(entry[0].Trim(), entry[1].Trim());
 		}
 	}
+
+	public string get_setting(string id) {
+		if(settings.ContainsKey(id)) return settings[id];
+		else {
+			Instance.DevConsole.error("Settings key \"" + id + "\" does not exist.");
+			return "0";
+		}
+	}
+
+	public bool has_setting(string id) {
+		if(settings.ContainsKey(id)) return true;
+		return false;
+	}
 		
 	void Start () {
+		if(get_setting("OnStart_Spawn_Car")=="true") {
+			float xpos = float.Parse(get_setting("OnStart_Car_SpawnLocation_X"), CultureInfo.InvariantCulture);
+			float zpos = float.Parse(get_setting("OnStart_Car_SpawnLocation_Z"), CultureInfo.InvariantCulture);
+			spaceHandle.handleObject.position = new Vector3(xpos, 0.0f, zpos);
+			if(get_setting("OnStart_Car_Type")=="max") PropSpawner.spawn_max_car();
+			else if(get_setting("OnStart_Car_Type")=="min") PropSpawner.spawn_min_car();
+			else if(get_setting("OnStart_Car_Type")=="cless") PropSpawner.spawn_cless_car();
+			else PropSpawner.spawn_max_car();
+		}
 	}
 
 	void Update () {

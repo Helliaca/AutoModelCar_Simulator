@@ -50,6 +50,7 @@ namespace RosSharp.RosBridgeClient
 
         public float[] Scan()
         {
+            if(directions==null) return null;
             // if sample number was changed we need to re-initialize all arrays to the appropriate length.
             if(samples!=directions.Length) {
                 directions = new Vector3[samples];

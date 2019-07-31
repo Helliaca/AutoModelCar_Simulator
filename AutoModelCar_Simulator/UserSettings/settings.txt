@@ -1,3 +1,7 @@
+RosBridgeServer_Url = ws://192.168.178.23:9090
+RosBridgeServer_Timeout = 10
+RosBridgeServer_Protocol = Web_Socket_Sharp
+
 Default_TopicNames_Camera = /carsim/{NAME}/camera/compressend
 Default_TopicNames_Gps = /localization/odom/5
 Default_TopicNames_LaserScanner = /scan
@@ -13,3 +17,9 @@ Default_TopicNames_SpeedNormalized = /manual_control/speed_nrm
 
 Default_PropNames = Prop_{ID}
 Default_CarNames = Vehicle_{ID}
+
+OnStart_Spawn_Car = true
+OnStart_Car_SpawnLocation_X = -0.7
+OnStart_Car_SpawnLocation_Z = 3.0
+OnStart_Car_Yaw = 0.0
+OnStart_Car_Type = max
