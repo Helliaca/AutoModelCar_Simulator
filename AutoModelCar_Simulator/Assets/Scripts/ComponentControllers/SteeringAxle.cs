@@ -23,14 +23,6 @@ public class SteeringAxle : MonoBehaviour
         set {Globals.Instance.DevConsole.error("Setting interwheel distance not implemented!");}
     }
 
-    // public float steering_topic {
-    //     set { 
-    //         _steering_topic = value;
-    //         _steering_goal = steering_interp.Evaluate(value); 
-    //         if(instant_response) _steering_real = steering_interp.Evaluate(value); 
-    //     }
-    //     get { return _steering_topic; }
-    // }
     public float steering_real_deg {
         get { 
             return _steering_real;
@@ -52,6 +44,29 @@ public class SteeringAxle : MonoBehaviour
     public float speed_mul = 0.055f;
     public bool instant_response = false;
 
+    private void read_interp(out AnimationCurve curve, string path) {
+        string text;
+        curve = new AnimationCurve();
+		try {
+			text = System.IO.File.ReadAllText(path);
+		}
+		catch(System.IO.FileNotFoundException e) {
+			Globals.Instance.DevConsole.error(e.FileName + " could not be found!");
+            return;
+		}
+
+		string[] linesInFile = text.Split('\n');
+	
+		foreach (string line in linesInFile)
+		{
+			if(line.Length<1) continue;
+			string[] entry = line.Split(':');
+            float t = float.Parse(entry[0].Trim(), System.Globalization.CultureInfo.InvariantCulture);
+            float v = float.Parse(entry[1].Trim(), System.Globalization.CultureInfo.InvariantCulture);
+            curve.AddKey(t, v);
+		}
+    }
+
 
 
     public void set_wheel_rotations(float left_phi, float right_phi) {
@@ -68,9 +83,16 @@ public class SteeringAxle : MonoBehaviour
         steering_normalized_topic = Globals.Instance.normalize_from_settings("Default_TopicNames_SteeringNormalized", master.id.ToString(), master.gameObject.name, "steeringaxle");
     }
 
+    private void interps() {
+        read_interp(out steering_normalized_interp, "UserSettings\\steeringaxle_interp_nrm.txt");
+        read_interp(out steering_pwm_interp, "UserSettings\\steeringaxle_interp_pwm.txt");
+        read_interp(out steering_real_interp, "UserSettings\\steeringaxle_interp_real.txt");
+    }
+
     void Start()
     {
         naming();
+        interps();
         if(!Connection) Connection = Globals.Instance.Connection;
         steering_pwm_sub = Connection.RosSocket.Subscribe<autominy_msgs.Autominy_SteeringPWMCommand>(steering_pwm_topic, steering_pwm_callback);
         steering_real_sub = Connection.RosSocket.Subscribe<autominy_msgs.Autominy_SteeringCommand>(steering_real_topic, steering_real_callback);

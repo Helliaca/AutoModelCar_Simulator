@@ -26,14 +26,6 @@ public class PropulsionAxle : MonoBehaviour
         set {Globals.Instance.DevConsole.error("Setting interwheel distance not implemented!");}
     }
 
-    // public float speed_pwm_topic {
-    //     set { 
-    //         _speed_topic = value;
-    //         _speed_goal = speed_pwm_interp.Evaluate(value); 
-    //         if(instant_response) _speed_real = speed_pwm_interp.Evaluate(value); 
-    //      }
-    //     get { return _speed_topic; }
-    // }
     public float speed_real {
         get { return _speed_real; }
     }
@@ -57,6 +49,35 @@ public class PropulsionAxle : MonoBehaviour
     private TicksPublisher ticks_publisher;
 
 
+    private void read_interp(out AnimationCurve curve, string path) {
+        string text;
+        curve = new AnimationCurve();
+		try {
+			text = System.IO.File.ReadAllText(path);
+		}
+		catch(System.IO.FileNotFoundException e) {
+			Globals.Instance.DevConsole.error(e.FileName + " could not be found!");
+            return;
+		}
+
+		string[] linesInFile = text.Split('\n');
+	
+		foreach (string line in linesInFile)
+		{
+			if(line.Length<1) continue;
+			string[] entry = line.Split(':');
+            float t = float.Parse(entry[0].Trim(), System.Globalization.CultureInfo.InvariantCulture);
+            float v = float.Parse(entry[1].Trim(), System.Globalization.CultureInfo.InvariantCulture);
+            curve.AddKey(t, v);
+		}
+    }
+
+    private void interps() {
+        read_interp(out speed_normalized_interp, "UserSettings\\propulsionaxle_interp_nrm.txt");
+        read_interp(out speed_pwm_interp, "UserSettings\\propulsionaxle_interp_pwm.txt");
+        read_interp(out speed_real_interp, "UserSettings\\propulsionaxle_interp_real.txt");
+    }
+
     private void naming() {
         PropComponentGroup master = GetComponentInParent(typeof(PropComponentGroup)) as PropComponentGroup; 
         if(master==null) {Globals.Instance.DevConsole.error("Component without master group encountered!"); return;}
@@ -69,6 +90,7 @@ public class PropulsionAxle : MonoBehaviour
     void Start()
     {
         naming();
+        interps();
         if(!Connection) Connection = Globals.Instance.Connection;
         speed_pwm_sub = Connection.RosSocket.Subscribe<autominy_msgs.Autominy_SpeedPWMCommand>(speed_pwm_topic, speed_pwm_callback);
         speed_real_sub = Connection.RosSocket.Subscribe<autominy_msgs.Autominy_SpeedCommand>(speed_real_topic, speed_real_callback);
