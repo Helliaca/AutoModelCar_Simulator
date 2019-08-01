@@ -45,39 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd8e821e0b448b246bc89d12e9e99e06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topic: /steering
   Connection: {fileID: 0}
-  left_wheel: {fileID: 3683041655921617529}
-  right_wheel: {fileID: 7116409304737131563}
-  acceleration_curve:
+  steering_pwm_interp:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  steering_interp:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
+      time: 950
       value: -25
       inSlope: 0
       outSlope: 0
@@ -86,7 +59,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 180
+      time: 2150
       value: 25
       inSlope: 0
       outSlope: 0
@@ -97,6 +70,72 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  steering_real_interp:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -25
+      value: -25
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 25
+      value: 25
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  steering_normalized_interp:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -1
+      value: 25
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: -25
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  steering_pwm_topic: /manual_control/steering_pwm
+  steering_real_topic: /manual_control/steering_real
+  steering_normalized_topic: /manual_control/steering_nrm
+  left_wheel: {fileID: 3683041655921617529}
+  right_wheel: {fileID: 7116409304737131563}
+  accl_mul: 0.4
+  speed_damp: 0.8
+  speed_mul: 0.055
+  instant_response: 0
 --- !u!1 &3485620113160268397
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,7 +188,7 @@ MonoBehaviour:
   time_increment: 0
   scan_time: 0
   range_min: 0.12
-  range_max: 3.5
+  range_max: 16
   ranges: []
   intensities: []
   visualizers:
@@ -216,8 +255,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Connection: {fileID: 0}
+  Topic: 
   odom_frequency: 30
-  topic: /localization/odom/5
   origin: {x: 0, y: 0, z: 0}
 --- !u!1 &6882636382675493071
 GameObject:
@@ -265,30 +304,96 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Connection: {fileID: 0}
-  acceleration_curve:
+  speed_pwm_interp:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0.0054779053
-      inSlope: 2
-      outSlope: 2
+      time: -1000
+      value: -5
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.36842948
-      value: 0.62342936
-      inSlope: 0.96163046
-      outSlope: 0.96163046
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.1149809
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1000
+      value: 5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  speed_real_interp:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -5
+      value: -5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 5
+      value: 5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  speed_normalized_interp:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -1
+      value: -5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     - serializedVersion: 3
       time: 1
-      value: 1.0602722
+      value: 5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -298,51 +403,18 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  speed_interp:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 150
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 600
-      value: 3
-      inSlope: 0.006666667
-      outSlope: 0.0036842106
-      tangentMode: 69
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 2500
-      value: 10
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  topic: /manual_control/speed
+  speed_pwm_topic: /manual_control/speed_pwm
+  speed_real_topic: /manual_control/speed_real
+  speed_normalized_topic: /manual_control/speed_nrm
+  ticks_topic: /sensors/arduino/ticks
+  meters_per_tick: 0.0026
+  ticks_frequency: 35
   left_wheel: {fileID: 391412290547244251}
   right_wheel: {fileID: 3177885269751229190}
+  delta_accl_mul: 0.4
+  delta_speed_damp: 0.8
+  delta_speed_mul: 0.055
+  instant_response: 0
 --- !u!1 &7498568755984881925
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,6 +510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62b541363542ea44be4a2f226f13c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   Component_Container: {fileID: 3053133304570760537}
   components:
   - reference: {fileID: 8558033693038746816}

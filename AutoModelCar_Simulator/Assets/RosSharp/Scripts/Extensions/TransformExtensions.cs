@@ -90,7 +90,8 @@ namespace RosSharp
 
         public static Vector3 Unity2Ros(this Vector3 vector3)
         {
-            return new Vector3(vector3.z, -vector3.x, vector3.y);
+            //return new Vector3(vector3.z, -vector3.x, vector3.y);
+            return new Vector3(-vector3.z, vector3.x, vector3.y);
         }
 
         public static Vector3 Ros2UnityScale(this Vector3 vector3)
@@ -110,6 +111,7 @@ namespace RosSharp
 
         public static Quaternion Unity2Ros(this Quaternion quaternion)
         {
+            //Debug.Log(new Quaternion(-quaternion.z, quaternion.x, -quaternion.y, quaternion.w).eulerAngles);
             return new Quaternion(-quaternion.z, quaternion.x, -quaternion.y, quaternion.w);
         }
 
