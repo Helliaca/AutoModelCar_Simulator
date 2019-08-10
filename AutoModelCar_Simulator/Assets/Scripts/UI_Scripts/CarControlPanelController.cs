@@ -32,22 +32,29 @@ public class CarControlPanelController : MonoBehaviour
     
     void Update()
     {
-        if(CurrentCarLabel.text != Globals.Instance.CurrentCar.gameObject.name) CurrentCarLabel.text = Globals.Instance.CurrentCar.gameObject.name;
-        rotationSlider.value = mod(Globals.Instance.CurrentCar.transform.eulerAngles.y, 360f);
-        speedSlider.value = Globals.Instance.CurrentCar.backAxle.speed_real;
-        steeringSlider.value = Globals.Instance.CurrentCar.frontAxle.steering_real_deg;
+        if(!Globals.Instance.CurrentCar) CurrentCarLabel.text = "[Empty]";
+        else if(CurrentCarLabel.text != Globals.Instance.CurrentCar.gameObject.name) 
+        {
+            CurrentCarLabel.text = Globals.Instance.CurrentCar.gameObject.name;
+            rotationSlider.value = mod(Globals.Instance.CurrentCar.transform.eulerAngles.y, 360f);
+            speedSlider.value = Globals.Instance.CurrentCar.backAxle.speed_real;
+            steeringSlider.value = Globals.Instance.CurrentCar.frontAxle.steering_real_deg;
+        }
     }
 
     public void set_rotation() {
+        if(!Globals.Instance.CurrentCar) return;
         Vector3 old_rot = Globals.Instance.CurrentCar.transform.eulerAngles;
         Globals.Instance.CurrentCar.transform.eulerAngles = new Vector3(old_rot.x, rotationSlider.value, old_rot.z);
     }
 
     public void set_speed() {
+        if(!Globals.Instance.CurrentCar) return;
         Globals.Instance.CurrentCar.backAxle.set_speed_override(speedSlider.value);
     }
 
     public void set_steering() {
+        if(!Globals.Instance.CurrentCar) return;
         Globals.Instance.CurrentCar.frontAxle.set_steering_override(steeringSlider.value);
     }
 
@@ -90,6 +97,7 @@ public class CarControlPanelController : MonoBehaviour
     }
 
     public void move_to_handle() {
+        if(!Globals.Instance.CurrentCar) return;
         Globals.Instance.CurrentCar.transform.position = Globals.Instance.spaceHandle.handleObject.position;
     }
 

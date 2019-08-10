@@ -4,6 +4,7 @@ using System.Reflection;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using System.Globalization;
+using UnityEngine.SceneManagement;
 
 /*
  * The attributes and methods included in this class are globally accessible by any other script via the 'Globals.Instance' variable.
@@ -52,6 +53,7 @@ public class Globals : MonoBehaviour {
 
 	//{ID}, {NAME} and {TYPE} are permitted
 	private Dictionary<string, string> settings = new Dictionary<string, string>(){};
+	private AsyncOperation asyncSceneLoader;
 
 	void Awake()
 	{
@@ -96,6 +98,17 @@ public class Globals : MonoBehaviour {
 	}
 		
 	void Start () {
+		if(get_setting("OnStart_Load_Scene")=="true") {
+			if(!has_setting("OnStart_Default_Scene")) {
+				Instance.DevConsole.warn("OnStart_Default_Scene is not set.");
+			}
+			Instance.load_scene(get_setting("OnStart_Default_Scene"));
+		}
+		StartCoroutine(onstart_spawn_car());
+	}
+
+	private IEnumerator onstart_spawn_car() {
+		yield return new WaitUntil(() => asyncSceneLoader.isDone);
 		if(get_setting("OnStart_Spawn_Car")=="true") {
 			float xpos = float.Parse(get_setting("OnStart_Car_SpawnLocation_X"), CultureInfo.InvariantCulture);
 			float zpos = float.Parse(get_setting("OnStart_Car_SpawnLocation_Z"), CultureInfo.InvariantCulture);
@@ -141,6 +154,16 @@ public class Globals : MonoBehaviour {
 		input = input.Replace("{NAME}", name);
 		input = input.Replace("{TYPE}", type);
 		return input;
+	}
+
+	public void load_scene(string scene) {
+		if(Application.CanStreamedLevelBeLoaded("sceneName")) {
+			DevConsole.error("Scene " + scene + " does not exist!");
+			return;
+		}
+		//SceneManager.LoadScene(scene, LoadSceneMode.Single);
+		asyncSceneLoader = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Single);
+		PorpList.refresh_props();
 	}
 
 }

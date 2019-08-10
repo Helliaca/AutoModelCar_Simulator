@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-using UnityEngine.SceneManagement;
 
 public class DevConsoleController : MonoBehaviour {
 	public InputField input;
@@ -92,17 +91,8 @@ public class DevConsoleController : MonoBehaviour {
 			Globals.Instance.CurrentCar.frontAxle.set_steering(float.Parse(cmds[1]));
 			print("Setting steering to " + cmds[1]);
 		}
-		else if(cmds[0] == "load" && cmds[1]== "scene") {
-			SceneManager.LoadScene("scene_simple", LoadSceneMode.Single);
-			Globals.Instance.PorpList.refresh_props();
-		}
-		else if(cmds[0] == "load" && cmds[1]== "scene_complex") {
-			SceneManager.LoadScene("scene_complex", LoadSceneMode.Single);
-			Globals.Instance.PorpList.refresh_props();
-		}
-		else if(cmds[0] == "load" && cmds[1]== "scene_min") {
-			SceneManager.LoadScene("scene_lab_min", LoadSceneMode.Single);
-			Globals.Instance.PorpList.refresh_props();
+		else if(cmds[0] == "load" && cmds.Length>1) {
+			Globals.Instance.load_scene(cmds[1]);
 		}
 		else if(cmds[0] == "rst") {
 			execute("HUD off");

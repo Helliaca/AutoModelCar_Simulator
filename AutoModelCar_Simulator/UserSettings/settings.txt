@@ -19,7 +19,10 @@ Default_PropNames = Prop_{ID}
 Default_CarNames = Vehicle_{ID}
 
 OnStart_Spawn_Car = true
-OnStart_Car_SpawnLocation_X = -0.7
-OnStart_Car_SpawnLocation_Z = 3.0
+OnStart_Car_SpawnLocation_X = 0.7
+OnStart_Car_SpawnLocation_Z = -3.0
 OnStart_Car_Yaw = 0.0
 OnStart_Car_Type = max
+
+OnStart_Load_Scene = true
+OnStart_Default_Scene = lab_detailed
