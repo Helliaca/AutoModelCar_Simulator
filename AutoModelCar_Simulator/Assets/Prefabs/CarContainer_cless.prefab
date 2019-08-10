@@ -187,7 +187,7 @@ MonoBehaviour:
   angle_increment: 0.0174533
   time_increment: 0
   scan_time: 0
-  range_min: 0.12
+  range_min: 0.15
   range_max: 16
   ranges: []
   intensities: []
@@ -408,7 +408,7 @@ MonoBehaviour:
   speed_normalized_topic: /manual_control/speed_nrm
   ticks_topic: /sensors/arduino/ticks
   meters_per_tick: 0.0026
-  ticks_frequency: 35
+  ticks_frequency: 60
   left_wheel: {fileID: 391412290547244251}
   right_wheel: {fileID: 3177885269751229190}
   delta_accl_mul: 0.4

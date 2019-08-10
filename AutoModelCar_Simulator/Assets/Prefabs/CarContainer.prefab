@@ -51,7 +51,7 @@ MonoBehaviour:
   angle_increment: 0.0174533
   time_increment: 0
   scan_time: 0
-  range_min: 0.12
+  range_min: 0.15
   range_max: 16
   ranges: []
   intensities: []
@@ -417,7 +417,7 @@ MonoBehaviour:
   resolutionWidth: 640
   resolutionHeight: 480
   qualityLevel: 50
-  frequency: 30
+  frequency: 14
 --- !u!1 &8132046562640297121
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,7 +568,7 @@ MonoBehaviour:
   speed_normalized_topic: /manual_control/speed_nrm
   ticks_topic: /sensors/arduino/ticks
   meters_per_tick: 0.0026
-  ticks_frequency: 35
+  ticks_frequency: 60
   left_wheel: {fileID: 8984135418138400680}
   right_wheel: {fileID: 7587161629009827736}
   delta_accl_mul: 0.4

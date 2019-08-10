@@ -2,18 +2,18 @@ RosBridgeServer_Url = ws://192.168.178.23:9090
 RosBridgeServer_Timeout = 10
 RosBridgeServer_Protocol = Web_Socket_Sharp
 
-Default_TopicNames_Camera = /carsim/{NAME}/camera/compressend
-Default_TopicNames_Gps = /localization/odom/5
-Default_TopicNames_LaserScanner = /scan
-Default_TopicNames_Ticks = /arduino/sensors/ticks
+Default_TopicNames_Camera = /sensors/camera/color/image_raw/compressed
+Default_TopicNames_Gps = /communication/gps/{ID}
+Default_TopicNames_LaserScanner = /sensors/rplidar/scan
+Default_TopicNames_Ticks = /sensors/arduino/ticks
 
-Default_TopicNames_SteeringPwm = /manual_control/steering_pwm
-Default_TopicNames_SteeringReal = /manual_control/steering_real
-Default_TopicNames_SteeringNormalized = /manual_control/steering_nrm
+Default_TopicNames_SteeringPwm = /actuators/steering_pwm
+Default_TopicNames_SteeringReal = /actuators/steering
+Default_TopicNames_SteeringNormalized = /actuators/steering_normalized
 
-Default_TopicNames_SpeedPwm = /manual_control/speed_pwm
-Default_TopicNames_SpeedReal = /manual_control/speed_real
-Default_TopicNames_SpeedNormalized = /manual_control/speed_nrm
+Default_TopicNames_SpeedPwm = /actuators/speed_pwm
+Default_TopicNames_SpeedReal = /actuators/speed
+Default_TopicNames_SpeedNormalized = /actuators/speed_normalized
 
 Default_PropNames = Prop_{ID}
 Default_CarNames = Vehicle_{ID}
