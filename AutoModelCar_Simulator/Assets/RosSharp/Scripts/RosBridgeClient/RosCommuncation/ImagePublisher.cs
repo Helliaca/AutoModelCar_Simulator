@@ -28,7 +28,7 @@ namespace RosSharp.RosBridgeClient
         public int resolutionHeight = 480;
         [Range(0, 100)]
         public int qualityLevel = 50;
-        public float frequency = 30;
+        public float frequency = 14;
 
         private Messages.Sensor.CompressedImage message;
         private Texture2D texture2D;
@@ -53,9 +53,10 @@ namespace RosSharp.RosBridgeClient
 
         private void UpdateImage(Camera _camera)
         {
-            if (Time.time > stime + 1f/frequency && texture2D != null && _camera == this.ImageCamera)
+            if (Time.time > stime + 1f/frequency && texture2D != null && _camera == this.ImageCamera) {
                 UpdateMessage();
                 stime = Time.time;
+            }
         }
 
         private void InitializeGameObject()
