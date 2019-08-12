@@ -113,7 +113,29 @@ The same principle applies for adding new cars or sensors to an existing prop.
 
 ### Topics
 
-(...)
+Each car can be controlled through a ROS node by the means of steering- and speed- topics. Each component publisher read data which can, in turn, be used by the nodes to adjust their respective outputs.
+
+The simulation environment subscribes to the following topics:
+
+- Steering (PWM)
+- Steering (Normalized)
+- Steering (Real)
+- Speed (PWM)
+- Speed (Normalized)
+- Speed (Real)
+
+The topics the simulation publishes to are:
+
+- Ticks
+- Lidar
+- GPS
+- Camera
+
+Each of these is handled by its respective component. Components can be added or removed from cars and objects by using the inspector panel.
+
+The topicname these publish to can be edited by clicking on it in the component-list. Default topicnames can be adjusted through the user settings.
+
+![picture](https://i.imgur.com/J3nXfh4.png)
 
 ### Using the Developers Console
 
@@ -130,5 +152,7 @@ Open up the developers console and run `load lab_detailed`, `load lab_standard` 
 ![picture](https://i.imgur.com/FQEv871.png)
 
 ### Editing Default Settings
+
+The `/UserSettings` directory contains text files that are parsed at program start for settings.
 
 ## Console Commands
