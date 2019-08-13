@@ -155,4 +155,100 @@ Open up the developers console and run `load lab_detailed`, `load lab_standard` 
 
 The `/UserSettings` directory contains text files that are parsed at program start for settings.
 
+The files named
+
+```
+propulsionaxle_interp_nrm.txt
+propulsionaxle_interp_pwm.txt
+propulsionaxle_interp_real.txt
+steeringaxle_interp_nrm.txt
+steeringaxle_interp_pwm.txt
+steeringaxle_interp_real.txt
+```
+
+describe the interpolation values of the speed and steering topics.
+
+The `settings.txt` file lists following values:
+
+```
+RosBridgeServer_Url: Url of the rosbridge server
+RosBridgeServer_Timeout: Time in seconds before connection timeout to rosbridge server
+RosBridgeServer_Protocol: Protocol to use for rosbridge server connection. Values can be "Web_Socket_Sharp" or "Web_Socket_NET"
+
+OnStart_Spawn_Car: Spawn a car once the program starts. true/false
+OnStart_Car_SpawnLocation_X: X coordinate of where to spawn that car (float)
+OnStart_Car_SpawnLocation_Z: Z coordinate of where to spawn that car (float)
+OnStart_Car_Yaw: Rotation value with which to spawn that car
+OnStart_Car_Type: Type of the spawned car (max/min/cless)
+
+OnStart_Load_Scene = true
+OnStart_Default_Scene = lab_detailed
+```
+
+The remaining fields describe default topic-names and prop names. These can be decorated with tokens that get their value from the object they belong to. Available tokens are `{ID}` for the objects id-number, `{NAME}` for the objects name or `{TYPE}` for the objects type.
+
+```
+Default_TopicNames_Camera: Default topicname for camera topic
+Default_TopicNames_Gps: Default topicname for GPS Odometry topic
+Default_TopicNames_LaserScanner: Default topicname for lidar topic
+Default_TopicNames_Ticks: Default topicname for ticks topic
+
+Default_TopicNames_SteeringPwm: Default topicname for pwm steering topic
+Default_TopicNames_SteeringReal: Default topicname for steering topic
+Default_TopicNames_SteeringNormalized: Default topicname for normalized steering topic
+
+Default_TopicNames_SpeedPwm: Default topicname for pwm speed topic
+Default_TopicNames_SpeedReal: Default topicname for speed topic
+Default_TopicNames_SpeedNormalized: Default topicname for normalized speed topic
+
+Default_PropNames: Default name ascribed to newly created props
+Default_CarNames: Default name ascribed to newly created cars
+```
+
+If you are planning to use multiple cars in a single simulation, it is recommended to give these topicnames a tokenized prefix (such as `/car_{ID}/...`). This way you'll avoid multiple cars publishing to the same topic. (See `settings_multicar.txt`)
+
 ## Console Commands
+
+Complete list of available console commands:
+
+- `clear`: Clears current console output.
+- `pause`: Stops simulation time.
+- `unpause`: Resumes simulation time.
+- `scc [string]`: Sets current car to the car with the name given as a parameter.
+- `toggle [lidar_lines/lidar_spheres/lidar_mesh]`: Enables visualization of lidar data as lines, spheres or a mesh as seen below.
+
+![picture](https://i.imgur.com/12XLmQ0.jpg)
+
+- `toggle Circle`: Enables/Disables visualization of the cars turning circle.
+- `toggle HUD`: Enables/Disables all UI elements at once.
+- `HUD basic`: Enables basic UI elements for steering/speed topics.
+- `HUD off`: Disables all UI elements at once.
+- `set_speed [float]`: Sets speed of current car to given value.
+- `set_steering [float]`: Sets steering of current car to given value.
+- `load [boot/lab_max/lab_standard/lab_min]`: Loads the scene given as a parameter.
+- `toggle [string]`: Enables/Disables the object with the given name. This command can be used to essentially toggle on/off any object within the unity-scene and thus offers a wide range of possibilites.
+
+### Toggle-Objects
+
+- `toggle [carname]`: Enables/Disables the car with the given name
+- `toggle [carname]_[steeringaxle/propaxle/camera/laserscanner/gps/collisiondetection]`: Enables/Disables the given component on the given car.
+- `toggle [carname]`: Enables/Disables the car with the given name
+- `toggle Environment`: Enables/Disables all environmental models in the scene, except for the floor map.
+- `toggle MapContainer`: Enables/Disables the floor map.
+- `toggle [UIElement]`: Enables/Disables the given UI element. The available options are the following:
+
+### Toggle-UIElements
+
+- `toggle FPS_Graph`: Enables/Disables a graph that shows current simulation frames-per-second.
+- `toggle Speed_Graph`: Enables/Disables a graph that tracks speed of current car.
+- `toggle Steering_Graph`: Enables/Disables a graph that tracks steering of current car.
+- `toggle Location_Graph`: Enables/Disables a graph that displays the current position of the car.
+- `toggle Ack_Graph`: Enables/Disables a graph that displays current ackerman-steering values.
+- `toggle Lidar_Graph`: Enables/Disables a graph that shows lidar-hitpoints.
+- `toggle Objects_Panel`: Enables/Disables the inspector panel.
+- `toggle Context_panel`: Enables/Disables a the contextual component panel.
+- `toggle MainControl_Panel`: Enables/Disables the main control panel that start at the top right by default.
+- `toggle CarControl_Panel`: Enables/Disables a the CarController panel that by default is found underneath the main control panel.
+
+Simulation with basic UI Elements:
+![picture](https://i.imgur.com/T5dXjdW.png)
