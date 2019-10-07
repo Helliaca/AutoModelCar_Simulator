@@ -6,6 +6,8 @@ The AutoModelCar-Simulator is a [Unity3D](https://unity.com/) and [RosSharp](htt
 
 It allows you to easily run and test simple ROS nodes in a virtual environment without requiring access to an actual AutoModelCar. The environment provided closely resembles the conditions found at the [FU-Berlin](https://www.fu-berlin.de/) robotics laboratory.
 
+A PDF documenting the development and inner workings of the application can be viewed [here.](https://github.com/Helliaca/AutoModelCar_Simulator/blob/master/AutoModelCarSimulator.pdf)
+
 ## How to get started?
 
 ### TL;DR
